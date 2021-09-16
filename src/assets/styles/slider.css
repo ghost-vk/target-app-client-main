@@ -1,0 +1,11 @@
+:root {
+    --swiper-theme-color: rgb(139, 92, 246) !important;
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+
+.swiper-button-next {
+    right: 0;
+}
