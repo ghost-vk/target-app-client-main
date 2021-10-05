@@ -2,7 +2,7 @@
   <AppSectionCard
     :title="title"
     button="Оставить заявку"
-    @button-click="showDialog(`Страница услуг ('${title}')`)"
+    @button-click="showDialog({ source: `Страница услуг ('${title}')`, shouldCallback: true })"
   >
     <template #scrollable-list>
       <div class="w-full" v-intersection="showScrollIcon" />

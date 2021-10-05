@@ -2,8 +2,14 @@
   <div class="mb-10">
     <FAQ
       :questions="questions.value"
+      category="target-setup"
       @toggle="toggleQuestion"
-      @open-lid-form="showDialog('Страница услуг (из секции частозадаваемых вопросов)')"
+      @open-lid-form="
+        showDialog({
+          source: 'Страница услуг (из секции частозадаваемых вопросов)',
+          shouldCallback: true,
+        })
+      "
     />
   </div>
 </template>

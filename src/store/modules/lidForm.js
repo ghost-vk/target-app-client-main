@@ -1,8 +1,10 @@
 import { lidFormSchema } from '@/utils/yup-config'
 import { isValidPhoneNumber } from 'libphonenumber-js'
-import axios from 'axios'
+import api from '@/http'
+// import { setApiErrorCallback } from '@/http/setApiErrorCallback'
+import { networkErrorNotification } from '../networkErrorNotification'
 import strLenFilter from '@/filters/strLen.filter'
-
+import { useGtag } from 'vue-gtag-next'
 import {
   UPDATE_CONTACT_TYPE_BUTTONS,
   UPDATE_CHECK,
@@ -17,8 +19,9 @@ import {
   UPDATE_CONTACT_TYPE,
   UPDATE_NEED_OF_COMMUNICATION,
   UPDATE_LOADING,
-  UPDATE_CALLBACK
 } from '../mutation-types'
+
+const { query } = useGtag()
 
 export default {
   namespaced: true,
@@ -65,16 +68,6 @@ export default {
       sendingFormStatus: true,
     },
     loading: false,
-    cb: {
-      success: () =>
-        new Promise((res) => {
-          res('s')
-        }),
-      failed: () =>
-        new Promise((res) => {
-          res('f')
-        }),
-    },
   }),
   getters: {
     isModalShown(state) {
@@ -104,19 +97,19 @@ export default {
     loading(state) {
       return state.loading
     },
-    cb(state) {
-      return state.cb
-    },
   },
   actions: {
-    showDialog({ commit, dispatch }, options) {
+    async showDialog({ commit, dispatch }, options) {
+      // TODO изменить shouldCallback в state
+      await dispatch('setLeadWithCookies')
+      commit(UPDATE_NEED_OF_COMMUNICATION, !!options.shouldCallback)
       commit(SHOW_MODAL)
-      if (typeof options === 'string') {
-        dispatch('setLidSource', strLenFilter(options, 255))
-      } else {
-        commit(UPDATE_NEED_OF_COMMUNICATION, !!options.shouldCallback)
-        dispatch('setLidSource', strLenFilter(options.source, 255))
-      }
+      const source = typeof options === 'string' ? options : options.source
+      dispatch('setLidSource', strLenFilter(source, 255))
+      query('event', 'view_lead_form', {
+        event_label: source,
+        event_category: 'leads',
+      })
     },
     hideModal({ commit }) {
       commit(HIDE_MODAL)
@@ -128,15 +121,37 @@ export default {
         for (const [key] of Object.entries(getters.fieldErrors)) {
           commit(UPDATE_ERROR_VALUE, { name: key, val: '' })
         }
-        await axios.post(`${SERVER_PATH}/api/lid`, getters.fieldValues)
+        await api.post(`${SERVER_PATH}/api/lid`, getters.fieldValues)
         if (!state.values.shouldCallback) {
           await dispatch('magnets/onGettingMagnet', null, { root: true })
         }
 
         dispatch('hideModal')
+        dispatch(
+          'user/setLead',
+          [
+            {
+              name: 'name',
+              val: getters.fieldValues.name,
+            },
+            {
+              name: 'phone',
+              val: getters.fieldValues.phone,
+            },
+            {
+              name: 'contactType',
+              val: getters.contactTypeButtons.filter((b) => b.selected)[0].value,
+            },
+          ],
+          { root: true }
+        )
         dispatch('resetValues')
         dispatch('updateNotification', { isShown: true, sendingFormStatus: true })
+        query('event', 'generate_lead') // Google analytics
       } catch (err) {
+        if (err.request) {
+          dispatch('notification/createMessage', networkErrorNotification(), { root: true })
+        }
         err?.inner?.forEach((error) => {
           commit(UPDATE_ERROR_VALUE, { name: error.path, val: error.message })
         })
@@ -193,6 +208,25 @@ export default {
         commit(UPDATE_LID_SOURCE, source)
       }
     },
+    setLeadWithCookies({ rootGetters, dispatch }) {
+      return new Promise((resolve, reject) => {
+        try {
+          const { name, phone, contactType } = rootGetters['user/lead']
+          if (name) {
+            dispatch('updateName', name)
+          }
+          if (phone) {
+            dispatch('updatePhone', phone)
+          }
+          if (contactType) {
+            dispatch('switchContactType', contactType)
+          }
+          resolve()
+        } catch (err) {
+          reject()
+        }
+      })
+    },
     resetValues({ commit }) {
       commit(UPDATE_CHECK, false)
       commit(UPDATE_NAME, '')
@@ -211,13 +245,6 @@ export default {
     updateLoading({ commit }, val) {
       commit(UPDATE_LOADING, !!val)
     },
-    setCb({ commit }, cb) {
-      const success = cb.success
-      const failed = cb.failed
-      if (typeof success === 'function' && typeof failed === 'function') {
-        commit(UPDATE_CALLBACK, cb)
-      }
-    }
   },
   mutations: {
     [UPDATE_CONTACT_TYPE_BUTTONS](state, btn) {
@@ -261,9 +288,5 @@ export default {
     [UPDATE_LOADING](state, val) {
       state.loading = val
     },
-    [UPDATE_CALLBACK](state, cb) {
-      console.log(cb);
-      state.cb = cb
-    }
   },
 }

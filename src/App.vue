@@ -5,19 +5,16 @@
       <AppMobileMenu v-if="isMenuOpened" @close="toggleMenu" />
     </Transition>
     <div class="min-h-screen">
-      <Loading
-        :active="isLoadingPage"
-        :is-full-page="true"
-        :color="colors.main"
-        :opacity="1"
-      />
+      <Loading :active="isLoadingPage" :is-full-page="true" :color="colors.main" :opacity="1" />
       <RouterView v-slot="{ Component }">
         <Transition name="fade">
           <Component :is="Component" />
         </Transition>
       </RouterView>
     </div>
-    <AppScrollToTopButton />
+    <AppScrollToTopButton :is-shown="isScrollButtonVisible" />
+    <AppCookieNotification />
+    <AppNotificationContainer />
     <AppFooter />
   </div>
 </template>
@@ -26,7 +23,9 @@
 import AppHeader from '@/components/AppHeader.vue'
 import AppMobileMenu from '@/components/AppMobileMenu.vue'
 import AppFooter from '@/components/AppFooter.vue'
-import AppScrollToTopButton from "@/components/AppScrollToTopButton.vue";
+import AppScrollToTopButton from '@/components/AppScrollToTopButton.vue'
+import AppCookieNotification from '@/components/AppCookieNotification.vue'
+import AppNotificationContainer from '@/components/AppNotificationContainer.vue'
 import Loading from 'vue-loading-overlay'
 import { mapGetters } from 'vuex'
 
@@ -36,6 +35,7 @@ export default {
       isMenuOpened: false,
       lastScrollPosition: window.scrollY,
       shouldHeaderVisible: true,
+      isScrollButtonVisible: false,
     }
   },
   components: {
@@ -43,7 +43,9 @@ export default {
     AppMobileMenu,
     AppFooter,
     Loading,
-    AppScrollToTopButton
+    AppScrollToTopButton,
+    AppCookieNotification,
+    AppNotificationContainer
   },
   methods: {
     toggleMenu() {
@@ -55,6 +57,7 @@ export default {
       if (scrollPath > 25 || scrollPath < -10) {
         this.lastScrollPosition = position
       }
+      this.isScrollButtonVisible = position > 500
     },
   },
   created() {
@@ -65,12 +68,16 @@ export default {
   },
   watch: {
     lastScrollPosition(newPosition, oldPosition) {
-      this.shouldHeaderVisible = !(newPosition > oldPosition)
+      if (newPosition > 200) {
+        this.shouldHeaderVisible = !(newPosition > oldPosition) && newPosition > 200
+      } else {
+        this.shouldHeaderVisible = true
+      }
     },
   },
   computed: mapGetters({
     isLoadingPage: 'isLoadingPage',
-    colors: 'globalVars/colors'
-  })
+    colors: 'globalVars/colors',
+  }),
 }
 </script>

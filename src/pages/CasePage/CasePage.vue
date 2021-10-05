@@ -64,8 +64,9 @@ export default {
     }),
     dateFilter,
   },
-  mounted() {
-    this.load(this.id)
+  async mounted() {
+    await this.load(this.id)
+    this.$gtag.event('page_view', { page_title: `Просмотр кейса: ${this.displayValues.title}` })
   },
   watch: {
     status(val) {

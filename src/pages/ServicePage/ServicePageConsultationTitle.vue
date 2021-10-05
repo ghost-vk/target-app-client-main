@@ -31,7 +31,7 @@ export default {
   methods: {
     openLidForm() {
       this.$emit('open-lid-form', { source: 'Страница услуг (Консультация)', shouldCallback: true })
-    }
+    },
   },
   setup() {
     const { screenWidth } = useScreenWidth()

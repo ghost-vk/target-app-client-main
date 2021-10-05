@@ -1,18 +1,25 @@
 <template>
   <div>
-    <ServicePageHero @open-lid-form="showDialog" />
+    <ServicePageHero
+      @open-lid-form="
+        (source) => {
+          showDialog({ source, shouldCallback: true })
+        }
+      "
+    />
     <ServicePageFeatures />
     <ServicePageAbout />
-    <ServicePageConsultationTitle @open-lid-form="showDialog" />
+    <ServicePageConsultationTitle
+      @open-lid-form="
+        (source) => {
+          showDialog({ source, shouldCallback: true })
+        }
+      "
+    />
     <ServicePageWorkSteps />
     <ServicePageBrief />
     <ServicePageCards />
-    <AppReviewsSection
-      @intersection="onReviewsIntersect"
-      :reviews="reviews"
-      :is-loading="isLoading"
-      :loading-status="loadingStatus"
-    />
+    <AppReviewsSection v-intersection="setServiceCategory" />
     <ServicePageFAQ />
     <ModalLidForm />
     <ModalLidFormCallbackNotification />
@@ -47,6 +54,13 @@ export default {
         })
       }
     },
+    updateActiveCategory: 'reviews/updateActiveCategory',
+    setServiceCategory() {
+      if (!this.isCatSet) {
+        this.isCatSet = true
+        this.updateActiveCategory('target-setup')
+      }
+    },
   }),
   computed: {
     ...mapGetters({
@@ -54,6 +68,14 @@ export default {
       loadingStatus: 'reviews/loadingStatus',
       isLoading: 'reviews/isLoading',
     }),
+  },
+  mounted() {
+    this.$gtag.event('page_view', { page_title: 'Cтраница услуг' })
+  },
+  data() {
+    return {
+      isCatSet: false,
+    }
   },
   components: {
     AppReviewsSection,

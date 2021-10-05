@@ -14,9 +14,11 @@ import {
   UPDATE_NEED_VISITORS,
   UPDATE_COST_PER_CLICK,
   UPDATE_BUDGET_AMOUNT,
-  UPDATE_FINAL_CALC_ERROR
+  UPDATE_FINAL_CALC_ERROR,
 } from '../mutation-types'
 import currencyFilter from '@/filters/currency.filter'
+import { useGtag } from 'vue-gtag-next'
+const { query } = useGtag()
 
 export default {
   namespaced: true,
@@ -76,7 +78,7 @@ export default {
       return state.intermediateValues
     },
     hasError(state) {
-      for (const [val] of Object.entries(state.errors)) {
+      for (const [key, val] of Object.entries(state.errors)) {
         if (val) {
           return true
         }
@@ -85,7 +87,7 @@ export default {
     },
     calcError(state) {
       return state.finalCalcError
-    }
+    },
   },
   actions: {
     toggleModal({ commit }, value) {
@@ -129,17 +131,11 @@ export default {
         for (const [key] of Object.entries(getters.errors)) {
           commit(UPDATE_ERROR_VALUE, { name: key, val: '' })
         }
-      } catch (err) {
-        err.inner.forEach((error) => {
-          commit(UPDATE_ERROR_VALUE, { name: error.path, val: error.message })
-        })
-      }
 
-      if (getters.hasError) {
-        return null
-      }
+        if (getters.hasError) {
+          return null
+        }
 
-      try {
         await dispatch('calcProceeds')
         await dispatch('calcConversion')
         await dispatch('calcSuccessConversion')
@@ -147,8 +143,16 @@ export default {
         await dispatch('calcNeedVisitors')
         await dispatch('calcBudget')
         dispatch('updateFinalCalcError', '')
-      } catch (e) {
-        dispatch('updateFinalCalcError', e)
+      } catch (err) {
+        dispatch('updateFinalCalcError', err)
+        err?.inner.forEach((error) => {
+          commit(UPDATE_ERROR_VALUE, { name: error.path, val: error.message })
+        })
+      } finally {
+        query('event', 'calc_ad_budget', {
+          event_label: 'Расчет рекламного бюджета',
+          event_category: 'calc',
+        })
       }
     },
     calcProceeds({ commit, state }) {
@@ -201,7 +205,7 @@ export default {
           UPDATE_NEED_LID,
           Math.floor(
             (100 * +state.values.orderQuantity) /
-            state.intermediateValues.conversionSuccessPercent.value
+              state.intermediateValues.conversionSuccessPercent.value
           )
         )
         resolve()
@@ -209,7 +213,8 @@ export default {
     },
     calcNeedVisitors({ commit, state }) {
       return new Promise((resolve, reject) => {
-        const needVisitorsFloat = (100 * state.intermediateValues.needLidCount) /
+        const needVisitorsFloat =
+          (100 * state.intermediateValues.needLidCount) /
           state.intermediateValues.conversionPercent.value
         if (!needVisitorsFloat || needVisitorsFloat === 0) {
           reject('Не удалось рассчитать необходимое количество посетителей')
@@ -245,7 +250,7 @@ export default {
     },
     updateFinalCalcError({ commit }, value) {
       commit(UPDATE_FINAL_CALC_ERROR, value)
-    }
+    },
   },
   mutations: {
     [TOGGLE_MODAL](state, value) {
@@ -292,6 +297,6 @@ export default {
     },
     [UPDATE_FINAL_CALC_ERROR](state, value) {
       state.finalCalcError = value
-    }
+    },
   },
 }

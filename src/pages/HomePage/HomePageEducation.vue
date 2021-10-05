@@ -43,9 +43,13 @@
             <AppBlueUnderlineLink @click="$router.push('/education')"
               >странице обучения</AppBlueUnderlineLink
             >. Также жду вас в своем
-            <a :href="contacts.telegramChat"
-              ><AppBlueUnderlineLink>бесплатном telegram чате</AppBlueUnderlineLink></a
+            <AnalyticsLink
+              route="Чат таргетологов"
+              :href="contacts.telegramChat"
+              target="_blank"
             >
+              <AppBlueUnderlineLink>бесплатном telegram чате</AppBlueUnderlineLink>
+            </AnalyticsLink>
             для таргетологов.
           </p>
         </div>
@@ -57,6 +61,7 @@
 <script>
 import img from '@/assets/img/about-education.jpg'
 import BubbleHeading from '@/components/AppHeadingBubble.vue'
+import AnalyticsLink from '@/components/AnalyticsLink.vue'
 import useImageLazyLoading from '@/use/imageLazyLoading'
 import { mapGetters } from 'vuex'
 
@@ -70,6 +75,7 @@ export default {
   },
   components: {
     BubbleHeading,
+    AnalyticsLink
   },
   computed: {
     ...mapGetters({

@@ -5,11 +5,13 @@ const path = require('path');
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
-  let serverPath
+  let serverPath, isDev
   if (command === 'serve') {
     serverPath = 'http://localhost:8080'
+    isDev = true
   } else {
-    serverPath = 'https://anastasi-target.ru'
+    serverPath = 'https://anastasi-target.ru:8080'
+    isDev = false
   }
 
   return  {
@@ -23,7 +25,8 @@ export default defineConfig(({ command, mode }) => {
       host: true
     },
     define: {
-      SERVER_PATH: JSON.stringify(serverPath)
+      SERVER_PATH: JSON.stringify(serverPath),
+      IS_PRODUCTION: !isDev
     }
   }
 });

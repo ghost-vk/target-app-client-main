@@ -7,33 +7,26 @@
       </p>
       <div class="flex flex-col sm:flex-row">
         <SectionHeroButton
-          @click="showDialog('Страница калькуляторов (Консультация)')"
+          @click="
+            showDialog({ source: 'Страница калькуляторов (Консультация)', shouldCallback: true })
+          "
           title="Получить консультацию"
         />
       </div>
     </SectionHero>
     <div class="container mb-20">
       <AppHeadingThird title="Расчет рекламного бюджета" />
+      <p class="mb-4">
+        Клиенты часто спрашивают меня про бюджет, необходимый на таргет и высчитывать
+        ориентировочный бюджет каждый раз довольно утомительно. Поэтому я решила что было бы здорово
+        иметь такой калькулятор, который упростил бы мою задачу.
+      </p>
+      <p class="mb-6">
+        Самое сложное здесь это цена за переход. Но чтобы ее узнать, можно написать в крупный чат
+        таргетологов, скорее всего уже кто-то работал с этой нишей. Если же никто не ответил, то
+        можно погуглить кейсы в данной нише и найти нужные цифры.
+      </p>
       <div class="flex flex-wrap justify-center">
-        <div
-          @click="toggleModal(true)"
-          class="
-            hidden
-            w-1/2
-            bg-white
-            rounded-lg
-            shadow
-            p-3
-            text-center
-            font-semibold
-            flex flex-col
-            items-center
-            cursor-pointer
-          "
-        >
-          <AppBudgetIcon class="h-12 w-12 text-purple-700 mb-3" />
-          Рекламный бюджет
-        </div>
         <CalculationPageCampaignBudget />
       </div>
     </div>
@@ -64,6 +57,9 @@ export default {
     SectionHero,
     SectionHeroMainTitle,
     SectionHeroButton,
+  },
+  mounted() {
+    this.$gtag.event('page_view', { page_title: 'Страница калькулятора рекламы' })
   },
 }
 </script>

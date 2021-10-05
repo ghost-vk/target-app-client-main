@@ -25,8 +25,27 @@
         md:p-10
       "
     >
-      <div @click.stop class="max-w-screen-sm h-screen sm:h-3/4 relative ">
-        <div @click="close" class="absolute bg-gray-400 top-20 right-2 sm:top-2 sm:right-2 z-20 bg-purple-300 bg-opacity-50 h-8 md:h-10 w-8 md:w-10 rounded-full flex justify-center items-center">
+      <div @click.stop class="max-w-screen-sm h-screen sm:h-3/4 relative">
+        <div
+          @click="close"
+          class="
+            absolute
+            bg-gray-400
+            top-20
+            right-2
+            sm:top-2 sm:right-2
+            z-20
+            bg-purple-300 bg-opacity-50
+            h-8
+            md:h-10
+            w-8
+            md:w-10
+            rounded-full
+            flex
+            justify-center
+            items-center
+          "
+        >
           <XIcon class="h-5 md:h-6 w-5 md:w-6 cursor-pointer" />
         </div>
         <div
@@ -38,7 +57,7 @@
             bg-gray-50
             sm:rounded-lg
             p-4
-            pt-24
+            pt-32
             md:p-8
             overflow-auto
             relative
@@ -46,13 +65,24 @@
             vld-parent
           "
         >
-          <Loading
-            :is-full-page="false"
-            :color="colors.main"
-          />
-          <div class="h-full overflow-auto">
+          <Loading :is-full-page="false" :color="colors.main" />
+          <div class="h-full overflow-auto z-20 relative">
             <slot />
           </div>
+          <div
+            class="
+              sm:hidden
+              absolute
+              top-0
+              left-0
+              bottom-0
+              right-0
+              bg-cover bg-no-repeat bg-center
+              opacity-20
+              z-0
+            "
+            :style="{ backgroundImage: `url(${bg})` }"
+          ></div>
         </div>
       </div>
     </div>
@@ -63,6 +93,7 @@
 import { XIcon } from '@heroicons/vue/outline'
 import Loading from 'vue-loading-overlay'
 import { mapGetters } from 'vuex'
+import bg from '@/assets/img/modal-bg.svg'
 
 export default {
   name: 'AppModalWindow',
@@ -77,20 +108,20 @@ export default {
       type: Boolean,
       default() {
         return false
-      }
-    }
+      },
+    },
   },
   components: {
     XIcon,
-    Loading
+    Loading,
   },
   computed: mapGetters({
-    colors: 'globalVars/colors'
+    colors: 'globalVars/colors',
   }),
   methods: {
     close() {
       this.$emit('close')
-    }
+    },
   },
   watch: {
     isShown(val) {
@@ -100,6 +131,11 @@ export default {
         document.body.classList.remove('overflow-hidden')
       }
     },
+  },
+  data() {
+    return {
+      bg,
+    }
   },
 }
 </script>

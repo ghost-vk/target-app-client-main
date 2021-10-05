@@ -8,8 +8,10 @@ import cases from './modules/cases'
 import post from './modules/post'
 import pageLoader from './modules/pageLoader'
 import magnets from './modules/magnets'
+import user from './modules/user'
+import notification from './modules/notification'
 
-const store = createStore({
+export const store = createStore({
   modules: {
     lidForm,
     faq,
@@ -19,7 +21,9 @@ const store = createStore({
     cases,
     post,
     pageLoader,
-    magnets
+    magnets,
+    user,
+    notification,
   },
 })
 

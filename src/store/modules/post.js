@@ -23,24 +23,29 @@ export default {
     },
   },
   actions: {
-    async loadPost({ commit, dispatch }, id) {
-      if (!Number(id)) {
-        commit('updateStatus', { name: 'notExist', val: true })
-        return
-      }
-      dispatch('updateLoadingPage', true, { root: true })
-      try {
-        let { data } = await axios.get(`${SERVER_PATH}/api/posts/${id}`)
-        data.thumbnail = data.thumbnail ? SERVER_PATH + data.thumbnail : ''
-        data.content = preparePostContent(data.content)
-        commit('updateDisplayValues', data)
-      } catch (err) {
-        commit('updateStatus', { name: 'failed', val: true })
-        router.push('/page-not-found')
-      } finally {
-        commit('updateStatus', { name: 'loaded', val: true })
-        dispatch('updateLoadingPage', false, { root: true })
-      }
+    loadPost({ commit, dispatch }, id) {
+      return new Promise(async (resolve, reject) => {
+        if (!Number(id)) {
+          commit('updateStatus', { name: 'notExist', val: true })
+          reject()
+          return
+        }
+        dispatch('updateLoadingPage', true, { root: true })
+        try {
+          let { data } = await axios.get(`${SERVER_PATH}/api/posts/${id}`)
+          data.thumbnail = data.thumbnail ? SERVER_PATH + data.thumbnail : ''
+          data.content = preparePostContent(data.content)
+          commit('updateDisplayValues', data)
+        } catch (err) {
+          commit('updateStatus', { name: 'failed', val: true })
+          router.push('/page-not-found')
+          reject()
+        } finally {
+          commit('updateStatus', { name: 'loaded', val: true })
+          dispatch('updateLoadingPage', false, { root: true })
+          resolve()
+        }
+      })
     },
   },
   mutations: {

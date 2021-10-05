@@ -17,13 +17,13 @@
 </template>
 
 <script>
-import bgImage from '@/assets/img/head-bg.svg';
+import bgImage from '@/assets/img/head-bg.svg'
 
 export default {
   data() {
     return {
       bgImage: bgImage,
-    };
+    }
   },
-};
+}
 </script>

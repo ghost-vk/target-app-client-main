@@ -1,5 +1,5 @@
 <template>
-  <section class="mb-8 md:mb-16" v-intersection="$emit('intersection')">
+  <section class="mb-8 md:mb-16" v-intersection="onIntersection">
     <div class="container">
       <AppHeadingThird title="Отзывы" />
       <transition
@@ -18,10 +18,11 @@
             </div>
           </div>
           <div v-else-if="loadingStatus && reviews?.length > 0" class="w-full lg:px-24">
+            <AppReviewsCategoriesGroupButtons class="max-w-screen-sm mx-auto justify-center" />
             <Swiper
               :slides-per-view="1"
               :navigation="screenWidth > 560"
-              :pagination="{ clickable: true }"
+              :pagination="reviews.length < 16 ? { clickable: true } : false"
               class="pb-10"
             >
               <SwiperSlide
@@ -43,9 +44,14 @@
             <div class="p-3 rounded-lg shadow bg-white">
               <EmojiSadIcon class="h-10 w-10 text-purple-400 mx-auto mb-3" />
               <p class="font-semibold text-lg">Не удалось загрузить отзывы...</p>
-              <AppBlueUnderlineLink>
-                <a :href="contacts.instagram" target="_blank">Посмотреть отзывы в Instagram</a>
-              </AppBlueUnderlineLink>
+
+              <AnalyticsLink
+                route="отзывы в Instagram (не загрузились отзывы)"
+                :href="contacts.instagram"
+                target="_blank"
+              >
+                <AppBlueUnderlineLink> Посмотреть отзывы в Instagram </AppBlueUnderlineLink>
+              </AnalyticsLink>
             </div>
           </div>
         </div>
@@ -61,34 +67,27 @@ import AppReviewCard from '@/components/AppReviewCard.vue'
 import { useScreenWidth } from '@/use/screenWidth'
 import { mapGetters, mapActions } from 'vuex'
 import { EmojiSadIcon, DatabaseIcon } from '@heroicons/vue/outline'
+import AppReviewsCategoriesGroupButtons from '@/components/AppReviewsCategoriesGroupButtons.vue'
+import AnalyticsLink from '@/components/AnalyticsLink.vue'
 
 SwiperCore.use([Navigation, Pagination])
 
 export default {
-  props: {
-    isLoading: {
-      type: Boolean
-    },
-    loadingStatus: {
-      type: Boolean
-    },
-    reviews: {
-      type: Array,
-      default() {
-        return []
-      }
-    }
-  },
   components: {
+    AppReviewsCategoriesGroupButtons,
     AppReviewCard,
     Swiper,
     SwiperSlide,
     EmojiSadIcon,
-    DatabaseIcon
+    DatabaseIcon,
+    AnalyticsLink,
   },
   computed: {
     ...mapGetters({
-      contacts: 'globalVars/contacts'
+      contacts: 'globalVars/contacts',
+      reviews: 'reviews/reviews',
+      loadingStatus: 'reviews/loadingStatus',
+      isLoading: 'reviews/isLoading',
     }),
   },
   setup() {
@@ -100,11 +99,18 @@ export default {
   },
   methods: {
     ...mapActions({
-      reset: 'reviews/reset'
-    })
+      reset: 'reviews/reset',
+      load: 'reviews/load',
+    }),
+    onIntersection() {
+      if (this.reviews.length) {
+        return
+      }
+      this.load({ limit: 100 })
+    },
   },
   unmounted() {
     this.reset()
-  }
+  },
 }
 </script>

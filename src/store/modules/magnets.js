@@ -10,7 +10,7 @@ export default {
       currentID: null,
       status: {
         loadingMagnets: false,
-        isMagnetsLoaded: false,
+        isMagnetsLoaded: false
       },
     }
   },
@@ -77,8 +77,8 @@ export default {
             if (state.linkToRedirect) {
               window.open(state.linkToRedirect, '_blank')
             }
+            resolve()
           }, 1500)
-          resolve()
         } catch (err) {
           console.log(err)
           reject()

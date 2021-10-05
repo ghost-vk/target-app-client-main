@@ -60,10 +60,9 @@
         <AppFullWidthRoundedButton type="submit" title="Посчитать" class="text-md md:text-lg" />
       </div>
     </form>
-    <!--      <div v-if="intermediateValues.budget.value > 0 && !calcError">-->
     <div class="md:pl-5 w-full md:w-1/2 font-semibold text-sm md:text-md">
       <h5 class="text-lg font-semibold text-center mb-3">Результаты расчета</h5>
-      <div v-if="calcError" class="text-red-400 bg-red-50 p-3 border border-solid border-red-400 rounded">{{ calcError }}</div>
+      <div v-if="calcError" class="text-red-400 bg-red-50 p-3 border border-solid border-red-400 rounded">Проверьте правильность заполнения полей</div>
       <div v-else>
         <p class="mb-4 text-xs text-center text-gray-500 font-medium md:px-16">
           Обращаем ваше внимание что данный рассчет примерный, итоговый результат необходимого бюджета
@@ -116,7 +115,7 @@
           intermediateValues.budget.value > 0 &&
           +intermediateValues.budget.value < +intermediateValues.proceeds.value
         "
-            @click="showDialog('Заявка на таргетированную рекламу из AdCalculator')"
+            @click="showDialog({ source: 'Заявка на таргетированную рекламу из AdCalculator', shouldCallback: true })"
             title="Оставить заявку на таргет"
             class="text-md md:text-lg"
           />

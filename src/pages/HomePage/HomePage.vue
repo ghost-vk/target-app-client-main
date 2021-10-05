@@ -39,6 +39,7 @@
       />
     </div>
     <HomePageSectionPosts />
+    <AppReviewsSection />
   </div>
 </template>
 
@@ -51,6 +52,7 @@ import SectionTitleWithButton from '@/components/ui/AppTitleWithButton.vue'
 import HomePageEducation from '@/pages/HomePage/HomePageEducation.vue'
 import HomePageSectionPosts from '@/pages/HomePage/HomePageSectionPosts.vue'
 import HomePageAboutCompany from "@/pages/HomePage/HomePageAboutCompany.vue";
+import AppReviewsSection from '@/components/AppReviewsSection.vue'
 
 export default {
   components: {
@@ -62,6 +64,10 @@ export default {
     SectionTitleWithButton,
     HomePageEducation,
     HomePageSectionPosts,
+    AppReviewsSection
   },
+  mounted() {
+    this.$gtag.event('page_view', { page_title: 'Домашняя страница' })
+  }
 }
 </script>

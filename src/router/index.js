@@ -30,6 +30,10 @@ const routes = [
     component: () => import('@/pages/CasePage/CasePage.vue'),
   },
   {
+    path: '/cases',
+    component: () => import('@/pages/CaseArchievePage.vue')
+  },
+  {
     path: '/:catchAll(.*)',
     component: () => import('@/pages/NotFound/NotFound.vue'),
   },

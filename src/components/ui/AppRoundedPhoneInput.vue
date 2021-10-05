@@ -17,7 +17,7 @@
           cursor-pointer
           select-none
         "
-        :class="error ? 'bg-red-50 border-red-400' : 'bg-blue-50'"
+        :class="error ? 'border-red-400' : 'bg-transparent'"
         @click="isListShown = !isListShown"
       >
         <span class="mr-2 text-xl">{{ currentCountry.emoji }}</span

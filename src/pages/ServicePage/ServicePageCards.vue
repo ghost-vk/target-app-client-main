@@ -4,8 +4,8 @@
       <div class="relative mb-28">
         <AppHeadingBubble title="Оставьте заявку" class="mb-14 md:mb-28" />
         <div class="text-md md:text-lg tracking-wide font-light mb-16">
-          <p class="mb-3 md:mb-6">
-            Я сертифицированный эксперт в таргетированной рекламе и имею большой опыт
+          <p class="mb-3 md:mb-6 relative z-20">
+            Я сертифицированный специалист в таргетированной рекламе и имею большой опыт
             в таргетированной рекламе на площадках Instagram, Facebook. Это позволяет
             мне выстраивать оптимальные рекламные кампании и масштабировать их.
           </p>

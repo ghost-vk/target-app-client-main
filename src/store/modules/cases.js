@@ -23,14 +23,15 @@ export default {
     }
   },
   actions: {
-    loadCases({ commit, dispatch, state }) {
+    loadCases({ commit, dispatch, state }, limit = 10) {
       return new Promise (async (resolve, reject) => {
         if (state.status.loaded || state.status.failed) {
           reject(false)
           return
         }
+        const queryLimit = Number(limit) > 0 ? `&limit=${limit}` : ''
         try {
-          const response = await axios.get(`${SERVER_PATH}/api/posts/?category=1&fullmode=0`)
+          const response = await axios.get(`${SERVER_PATH}/api/posts/?category=1&fullmode=0${queryLimit}`)
           commit('updateCases', response.data.data)
           resolve(true)
           if (state.status.failed) {

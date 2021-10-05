@@ -1,26 +1,15 @@
 <template>
-  <div class="py-5">
-    <div
-      class="
-        w-full
-        md:w-2/3
-        lg:w-1/2
-        mx-auto
-        flex flex-col
-        items-center
-        text-center
-        bg-white
-        shadow-lg
-        p-5
-        rounded-xl
-      "
-    >
+  <div class="py-5 w-full md:w-2/3 lg:w-1/2">
+    <div class="mx-auto w-full flex flex-col items-center text-center bg-white shadow-lg p-5 rounded-xl">
       <img
         :src="thumbnail"
         class="w-24 h-24 block rounded-full mb-5 transition-opacity duration-300"
         :alt="`Довольный клиент ${name}`"
       />
-      <p class="text-xs sm:text-sm md:text-base text-gray-500 leading-relaxed mb-5" v-html="body" />
+      <p
+        class="text-xs sm:text-sm md:text-base text-gray-500 leading-relaxed mb-5 text-left"
+        v-html="body"
+      />
       <span class="text-gray-700 font-semibold text-sm uppercase mb-2">{{ name }}</span>
       <span v-if="vocation" class="text-gray-600 font-light text-sm mb-3">{{ vocation }}</span>
       <a v-if="instagram" :href="instagram" target="_blank">
@@ -41,15 +30,15 @@ export default {
       required: true,
     },
     vocation: {
-      type: String
+      type: String,
     },
     instagram: {
-      type: String
+      type: String,
     },
     body: {
       type: String,
       required: true,
     },
-  }
+  },
 }
 </script>

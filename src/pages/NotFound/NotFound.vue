@@ -20,6 +20,9 @@ export default {
       imageClass,
       lazyLoading
     }
+  },
+  mounted() {
+    this.$gtag.event('page_view', { page_title: '404' })
   }
 }
 </script>

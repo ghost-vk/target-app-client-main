@@ -11,7 +11,7 @@
           <UserGroupIcon :class="iconClassList" />
         </template>
       </AppFeaturesRowItem>
-      <AppFeaturesRowItem title="600.000 ₽" body="успешно открученного бюджета">
+      <AppFeaturesRowItem title="2.000.000 ₽" body="успешно открученного бюджета">
         <template #icon>
           <CashIcon :class="iconClassList" />
         </template>

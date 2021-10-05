@@ -23,30 +23,44 @@
             />
           </RouterLink>
           <RouterLink to="/service" v-slot="{ href, isExactActive, navigate }">
-            <AppHeaderLink
-              @click="navigate"
-              :class="isExactActive ? activeLinkClass + ' mr-10' : ' mr-10'"
-              title="Услуги"
-            />
+            <AppBalloon
+              text="настройка таргета, консультации"
+              balloon-class-list="top-16 left-1/2 -translate-x-1/2 w-32 w-auto whitespace-nowrap"
+              class="h-full"
+            >
+              <AppHeaderLink
+                @click="navigate"
+                :class="isExactActive ? activeLinkClass + ' mr-10' : ' mr-10'"
+                title="Услуги"
+              />
+            </AppBalloon>
           </RouterLink>
           <RouterLink to="/education" v-slot="{ href, isExactActive, navigate }">
-            <AppHeaderLink
-              @click="navigate"
-              :class="isExactActive ? activeLinkClass + ' mr-10' : ' mr-10'"
-              title="Обучение"
-            />
-          </RouterLink>
-          <div class="flex items-center justify-center cursor-not-allowed mr-10">
             <AppBalloon
-              text="в разработке"
-              balloon-class-list="top-9 left-1/2 -translate-x-1/2 w-32 w-auto whitespace-nowrap"
+              text="менторство, телеграм-чат, мастермайнды"
+              balloon-class-list="top-16 left-1/2 -translate-x-1/2 w-32 w-auto whitespace-nowrap"
+              class="h-full"
             >
-              <span>Блог</span>
+              <AppHeaderLink
+                @click="navigate"
+                :class="isExactActive ? activeLinkClass + ' mr-10' : ' mr-10'"
+                title="Обучение"
+              />
             </AppBalloon>
-            <span class="ml-1 px-2 py-1 bg-gray-50 text-purple-600 rounded-full text-xs"
-              >скоро</span
+          </RouterLink>
+          <RouterLink to="/cases" v-slot="{ href, isExactActive, navigate }">
+            <AppBalloon
+              text="мои кейсы по таргету"
+              balloon-class-list="top-16 left-1/2 -translate-x-1/2 w-32 w-auto whitespace-nowrap"
+              class="h-full"
             >
-          </div>
+              <AppHeaderLink
+                @click="navigate"
+                :class="isExactActive ? activeLinkClass + ' mr-10' : ' mr-10'"
+                title="Кейсы"
+              />
+            </AppBalloon>
+          </RouterLink>
           <RouterLink to="/calc" v-slot="{ href, isExactActive, navigate }" exact-path>
             <AppBalloon
               text="примерный расчет рекламного бюджета, стоимости заявки и т.д."
