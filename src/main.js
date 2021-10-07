@@ -17,7 +17,7 @@ app.use(VueLazyLoad, {
 
 app.use(VueGtag, {
   config: { id: 'G-RNXS68R8T1' },
-  useDebugger: true
+  useDebugger: !IS_PRODUCTION,
 })
 
 components.forEach((component) => {

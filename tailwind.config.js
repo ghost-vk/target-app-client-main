@@ -1,8 +1,6 @@
-const path = require('path');
-
 module.exports = {
-  purge: [path.resolve(__dirname, './src/layout/*.html')],
-  darkMode: false, // or 'media' or 'class'
+  purge: ['./src/**/*.{vue,js}'],
+  darkMode: false,
   theme: {
     container: {
       center: true,
@@ -14,11 +12,8 @@ module.exports = {
     },
     extend: {
       minHeight: {
-        '3/4': '75%'
+        '3/4': '75%',
       },
-      height: {
-
-      }
     },
   },
   variants: {
@@ -27,4 +22,4 @@ module.exports = {
     },
   },
   plugins: [],
-};
+}

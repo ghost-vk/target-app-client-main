@@ -54,7 +54,7 @@
           @update:model-value="toggleCheck"
         />
         <p class="pl-2 text-xs w-full">
-          Даю свое согласие на <a href="#" class="underline">обработку персональных данных</a>
+          Даю свое согласие на <a href="/s/privacy.html" target="_blank" class="underline">обработку персональных данных</a>
         </p>
       </div>
       <div v-if="fieldErrors.check" class="text-xs text-red-400">{{ fieldErrors.check }}</div>

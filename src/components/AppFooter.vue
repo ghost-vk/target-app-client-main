@@ -26,7 +26,8 @@
           <RouterLink to="/cases" class="mb-3">
             <span class="font-bold">Мои кейсы</span>
           </RouterLink>
-          <a href="/privacy.html" target="_blank">Политика конфиденциальности</a>
+          <a href="/s/privacy.html" target="_blank" class="mb-3">Политика конфиденциальности</a>
+          <a href="/s/user-agreement.html" target="_blank">Пользовательское соглашение</a>
         </div>
         <div
           class="
@@ -78,6 +79,7 @@
           </div>
         </div>
       </div>
+      <div class="max-w-screen-sm mx-auto px-2 text-gray-500 text-sm text-center mb-3">Кузнецов Владислав Антонович<br />ИНН 590423743801</div>
       <div class="text-center px-3 text-gray-400">&copy; Все права защищены 2021</div>
     </div>
   </footer>

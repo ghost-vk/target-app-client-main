@@ -3,14 +3,13 @@ import vue from '@vitejs/plugin-vue';
 
 const path = require('path');
 
-// https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   let serverPath, isDev
   if (command === 'serve') {
     serverPath = 'http://localhost:8080'
     isDev = true
   } else {
-    serverPath = 'https://anastasi-target.ru:8080'
+    serverPath = 'http://anastasi-target.ru'
     isDev = false
   }
 
