@@ -21,7 +21,7 @@
             <AppReviewsCategoriesGroupButtons class="max-w-screen-sm mx-auto justify-center" />
             <Swiper
               :slides-per-view="1"
-              :navigation="screenWidth > 560"
+              navigation
               :pagination="reviews.length < 16 ? { clickable: true } : false"
               class="pb-10"
             >

@@ -1,5 +1,5 @@
 <template>
-  <div class="py-5 w-full md:w-2/3 lg:w-1/2">
+  <div class="py-5 px-2 w-full md:w-2/3 lg:w-1/2">
     <div class="mx-auto w-full flex flex-col items-center text-center bg-white shadow-lg p-5 rounded-xl">
       <img
         :src="thumbnail"
@@ -7,7 +7,8 @@
         :alt="`Довольный клиент ${name}`"
       />
       <p
-        class="text-xs sm:text-sm md:text-base text-gray-500 leading-relaxed mb-5 text-left"
+        class="text-xs sm:text-sm md:text-base text-gray-500 leading-relaxed mb-5 text-left overflow-auto pr-3"
+        style="max-height:250px"
         v-html="body"
       />
       <span class="text-gray-700 font-semibold text-sm uppercase mb-2">{{ name }}</span>
