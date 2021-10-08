@@ -11,8 +11,10 @@
         justify-center
         items-center
         group
+        cursor-pointer
       "
       :style="thumbnail ? `background-image:url('${host}${thumbnail}')` : ''"
+      @click="$router.push(`/cases/${id}`)"
     >
       <div
         class="
@@ -31,7 +33,6 @@
       />
       <button
         type="button"
-        @click="$router.push(`/cases/${id}`)"
         class="
           hidden
           lg:block

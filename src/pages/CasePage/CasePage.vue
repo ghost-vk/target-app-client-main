@@ -1,7 +1,7 @@
 <template>
   <div class="container py-28 lg:py-40">
     <div class="max-w-screen-sm mx-auto border-b border-solid border-gray-300 pb-3">
-      <router-link to="/#cases">
+      <router-link to="/cases">
         <AppBlueUnderlineLink class="uppercase mb-2">кейсы</AppBlueUnderlineLink>
       </router-link>
       <h1 class="text-4xl lg:text-6xl font-bold mb-5">{{ displayValues.title }}</h1>

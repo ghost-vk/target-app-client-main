@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap justify-start text-gray-800 text-sm select-none">
+  <div class="flex flex-wrap justify-center text-gray-800 text-sm select-none">
     <AppGroupButtonItem
       v-for="btn in buttons"
       :key="btn.value"
