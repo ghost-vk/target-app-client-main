@@ -16,7 +16,7 @@ app.use(VueLazyLoad, {
 })
 
 app.use(VueGtag, {
-  config: { id: 'G-RNXS68R8T1' },
+  property: { id: import.meta.env['VITE_GTAG_ID'] },
   useDebugger: !IS_PRODUCTION,
 })
 

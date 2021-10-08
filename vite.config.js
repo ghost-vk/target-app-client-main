@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
-const path = require('path');
+const path = require('path')
 
 export default defineConfig(({ command, mode }) => {
   let serverPath, isDev
@@ -13,7 +13,7 @@ export default defineConfig(({ command, mode }) => {
     isDev = false
   }
 
-  return  {
+  return {
     plugins: [vue()],
     resolve: {
       alias: {
@@ -21,11 +21,11 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     server: {
-      host: true
+      host: true,
     },
     define: {
       SERVER_PATH: JSON.stringify(serverPath),
-      IS_PRODUCTION: !isDev
-    }
+      IS_PRODUCTION: !isDev,
+    },
   }
-});
+})
