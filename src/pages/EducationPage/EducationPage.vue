@@ -274,7 +274,7 @@ export default {
     questions: 'faq/educationPageQuestions',
   }),
   mounted() {
-    this.$gtag.event('page_view', { page_title: 'Станица обучения' })
+    this.$gtag.event('page_view', { page_title: 'Страница обучения' })
   },
   components: {
     NastyaRoundedCard,

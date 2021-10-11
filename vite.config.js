@@ -9,7 +9,7 @@ export default defineConfig(({ command, mode }) => {
     serverPath = 'http://localhost:8080'
     isDev = true
   } else {
-    serverPath = 'http://anastasi-target.ru'
+    serverPath = 'https://anastasi-target.ru'
     isDev = false
   }
 
