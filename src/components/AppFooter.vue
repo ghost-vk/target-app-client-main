@@ -79,7 +79,6 @@
           </div>
         </div>
       </div>
-      <div class="max-w-screen-sm mx-auto px-2 text-gray-500 text-sm text-center mb-3">Кузнецов Владислав Антонович<br />ИНН 590423743801</div>
       <div class="text-center px-3 text-gray-400">&copy; Все права защищены 2021</div>
     </div>
   </footer>

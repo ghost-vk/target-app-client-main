@@ -1,21 +1,9 @@
 <template>
   <div>
-    <ServicePageHero
-      @open-lid-form="
-        (source) => {
-          showDialog({ source, shouldCallback: true })
-        }
-      "
-    />
+    <ServicePageHero @open-lid-form="onShowDialog" />
     <ServicePageFeatures />
     <ServicePageAbout />
-    <ServicePageConsultationTitle
-      @open-lid-form="
-        (source) => {
-          showDialog({ source, shouldCallback: true })
-        }
-      "
-    />
+    <ServicePageConsultationTitle @open-lid-form="onShowDialog" />
     <ServicePageWorkSteps />
     <ServicePageBrief />
     <ServicePageCards />
@@ -42,9 +30,12 @@ import ModalLidFormCallbackNotification from '@/components/ModalLidFormCallbackN
 import AppReviewsSection from '@/components/AppReviewsSection.vue'
 
 export default {
-  methods: mapActions({
-    showDialog: 'lidForm/showDialog',
-    loadReviews: 'reviews/load',
+  methods: {
+    ...mapActions({
+      showDialog: 'lidForm/showDialog',
+      loadReviews: 'reviews/load',
+      updateActiveCategory: 'reviews/updateActiveCategory',
+    }),
     onReviewsIntersect() {
       if (!this.reviews.length) {
         this.loadReviews({
@@ -54,14 +45,17 @@ export default {
         })
       }
     },
-    updateActiveCategory: 'reviews/updateActiveCategory',
     setServiceCategory() {
       if (!this.isCatSet) {
         this.isCatSet = true
         this.updateActiveCategory('target-setup')
       }
     },
-  }),
+    onShowDialog(data) {
+      console.log(data)
+      this.showDialog(data)
+    },
+  },
   computed: {
     ...mapGetters({
       reviews: 'reviews/reviews',
