@@ -45,7 +45,7 @@ export default {
     Loading,
     AppScrollToTopButton,
     AppCookieNotification,
-    AppNotificationContainer
+    AppNotificationContainer,
   },
   methods: {
     toggleMenu() {
