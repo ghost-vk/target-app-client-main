@@ -16,10 +16,9 @@
     <HomePageAboutCompany />
     <HomePageServices />
     <div class="container mb-8 sm:mb-16 sm:test-lg md:text-xl">
-      Я предоставляю качественные услуги по настройке таргета. Я всегда в курсе
-      последних обновлений Facebook / Instagram. Со мной можно быть уверенным в том,
-      что ваш рекламный кабинет не будет заблокирован, а реклама будет настроена
-      оптимально для вашего бизнеса и бюджета.
+      Я предоставляю качественные услуги по настройке таргета. Я всегда в курсе последних обновлений
+      Facebook / Instagram. Со мной можно быть уверенным в том, что ваш рекламный кабинет не будет
+      заблокирован, а реклама будет настроена оптимально для вашего бизнеса и бюджета.
     </div>
     <div class="container mb-14 sm:mb-56">
       <AppTitleWithButton
@@ -40,6 +39,8 @@
     </div>
     <HomePageSectionPosts />
     <AppReviewsSection />
+    <ModalLidForm />
+    <ModalLidFormCallbackNotification />
   </div>
 </template>
 
@@ -51,8 +52,11 @@ import HomePageServices from '@/pages/HomePage/HomePageServices.vue'
 import SectionTitleWithButton from '@/components/ui/AppTitleWithButton.vue'
 import HomePageEducation from '@/pages/HomePage/HomePageEducation.vue'
 import HomePageSectionPosts from '@/pages/HomePage/HomePageSectionPosts.vue'
-import HomePageAboutCompany from "@/pages/HomePage/HomePageAboutCompany.vue";
+import HomePageAboutCompany from '@/pages/HomePage/HomePageAboutCompany.vue'
 import AppReviewsSection from '@/components/AppReviewsSection.vue'
+import ModalLidForm from '@/components/ModalLidForm.vue'
+import ModalLidFormCallbackNotification from '@/components/ModalLidFormCallbackNotification.vue'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -64,10 +68,19 @@ export default {
     SectionTitleWithButton,
     HomePageEducation,
     HomePageSectionPosts,
-    AppReviewsSection
+    AppReviewsSection,
+    ModalLidForm,
+    ModalLidFormCallbackNotification,
   },
   mounted() {
     this.$gtag.event('page_view', { page_title: 'Домашняя страница' })
-  }
+    console.log(this.$route)
+    if (this.$route.query['lead_form'] !== undefined && this.$route.query['lead_form'] === 'true') {
+      this.showDialog({ shouldCallback: true, source: 'Инстраграм Директ' })
+    }
+  },
+  methods: mapActions({
+    showDialog: 'lidForm/showDialog',
+  }),
 }
 </script>

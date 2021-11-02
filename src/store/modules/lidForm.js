@@ -31,7 +31,7 @@ export default {
       name: '',
       phone: '',
       check: false, // Privacy
-      contactType: 'wa',
+      contactType: "What's App",
       source: '', // From where the form is opened
       countryCode: 'RU',
       shouldCallback: true,
