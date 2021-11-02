@@ -31,7 +31,7 @@ export default {
       name: '',
       phone: '',
       check: false, // Privacy
-      contactType: '',
+      contactType: 'wa',
       source: '', // From where the form is opened
       countryCode: 'RU',
       shouldCallback: true,
@@ -100,7 +100,6 @@ export default {
   },
   actions: {
     async showDialog({ commit, dispatch }, options) {
-      // TODO изменить shouldCallback в state
       await dispatch('setLeadWithCookies')
       commit(UPDATE_NEED_OF_COMMUNICATION, !!options.shouldCallback)
       commit(SHOW_MODAL)
