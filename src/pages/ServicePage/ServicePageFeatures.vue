@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppFeaturesRow class="mb-20 md:px-24 container">
-      <AppFeaturesRowItem title="4,07%" body="ctr личный рекорд(по кликабельному креативу)">
+      <AppFeaturesRowItem title="5,26%" body="ctr личный рекорд(по кликабельному креативу)">
         <template #icon>
           <BadgeCheckIcon :class="iconClassList" />
         </template>

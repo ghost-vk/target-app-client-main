@@ -30,6 +30,7 @@
             >Бесплатные материалы</span
           >
         </RouterLink>
+        <AppMobileMenuDropdown />
         <RouterLink to="/calc" v-slot="{ navigate, isExactActive }" class="mb-4">
           <span @click="navigate" :class="isExactActive ? 'font-bold' : ''">AdCalculator</span>
         </RouterLink>
@@ -77,12 +78,14 @@ import { XIcon } from '@heroicons/vue/outline'
 import { mapGetters } from 'vuex'
 import AppTelegramChatPill from '@/components/AppTelegramChatPill.vue'
 import AnalyticsLink from '@/components/AnalyticsLink.vue'
+import AppMobileMenuDropdown from '@/components/AppMobileMenuDropdown.vue'
 
 export default {
   components: {
     XIcon,
     AppTelegramChatPill,
     AnalyticsLink,
+    AppMobileMenuDropdown
   },
   methods: {
     close() {

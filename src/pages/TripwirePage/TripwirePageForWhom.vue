@@ -1,7 +1,7 @@
 <template>
   <section class="lg:mb-44 py-20 overflow-hidden">
     <div class="container">
-      <AppHeadingBubble text-side="left" title="Для кого этот продукт?" class="mb-28 lg:mb-40" />
+      <AppHeadingBubble text-side="left" title="Для кого этот материал?" class="mb-28 lg:mb-40" />
     </div>
     <div class="md:container">
       <div
@@ -31,7 +31,7 @@
             "
           >
             <div class="mr-6 flex-shrink-0" v-html="t.icon"></div>
-            <h3 class="text-xl lg:text-2xl" v-html="t.title"></h3>
+            <h3 class="text-xl lg:text-2xl leading-3" v-html="t.title"></h3>
           </div>
           <div class="px-4 py-5 lg:px-8 lg:py-10 bg-purple-200" v-html="t.body"></div>
         </div>

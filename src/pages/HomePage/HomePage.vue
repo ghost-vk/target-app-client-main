@@ -67,7 +67,9 @@ export default {
     AppReviewsSection
   },
   mounted() {
-    this.$gtag.event('page_view', { page_title: 'Домашняя страница' })
+    if (this.$gtag) {
+      this.$gtag.event('page_view', { page_title: 'Домашняя страница' })
+    }
   }
 }
 </script>

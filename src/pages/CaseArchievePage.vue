@@ -11,17 +11,14 @@
           рекламы, своего рода разбор полетов.
         </p>
         <p>
-          Здесь вы можете ознакомится с моим опытом работы. Это важно как для клиентов, так
-          и для учеников.
+          Здесь вы можете ознакомится с моим опытом работы. Это важно как для клиентов, так и для
+          учеников.
         </p>
       </div>
     </div>
     <div class="container pb-20">
       <AppHeadingThird title="Мои кейсы" />
-      <div
-        class="vld-parent w-full"
-        :class="!postsLoadingStatus.loaded ? 'h-80' : 'h-0'"
-      >
+      <div class="vld-parent w-full" :class="!postsLoadingStatus.loaded ? 'h-80' : 'h-0'">
         <Loading
           :active="!postsLoadingStatus.loaded"
           :is-full-page="false"
@@ -92,12 +89,12 @@ export default {
   }),
   data() {
     return {
-      pageTitle: 'Кейсы по настройке таргетированной рекламы'
+      pageTitle: 'Кейсы по настройке таргетированной рекламы',
     }
   },
   mounted() {
     this.load(150)
-    this.$gtag.event('page_view', { page_title: this.pageTitle })
+    this?.$gtag?.event('page_view', { page_title: this.pageTitle })
   },
 }
 </script>

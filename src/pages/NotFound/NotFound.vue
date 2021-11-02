@@ -22,7 +22,7 @@ export default {
     }
   },
   mounted() {
-    this.$gtag.event('page_view', { page_title: '404' })
+    this?.$gtag?.event('page_view', { page_title: '404' })
   }
 }
 </script>
