@@ -1,5 +1,5 @@
 <template>
-  <section class="mb-8 md:mb-16" v-intersection="onIntersection" id="reviews">
+  <section class="mb-8 md:mb-16" v-intersection="onIntersection" id="at_reviews">
     <div class="container">
       <AppHeadingThird title="Отзывы" />
       <transition
@@ -69,6 +69,8 @@ import { mapGetters, mapActions } from 'vuex'
 import { EmojiSadIcon, DatabaseIcon } from '@heroicons/vue/outline'
 import AppReviewsCategoriesGroupButtons from '@/components/AppReviewsCategoriesGroupButtons.vue'
 import AnalyticsLink from '@/components/AnalyticsLink.vue'
+import { useNodeView } from '@/use/useNodeView'
+import { onMounted } from 'vue'
 
 SwiperCore.use([Navigation, Pagination])
 
@@ -92,6 +94,9 @@ export default {
   },
   setup() {
     const { screenWidth } = useScreenWidth()
+
+    onMounted(useNodeView)
+
     return {
       screenWidth,
       serverHost: SERVER_PATH,
