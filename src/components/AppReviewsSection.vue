@@ -1,5 +1,5 @@
 <template>
-  <section class="mb-8 md:mb-16" v-intersection="onIntersection">
+  <section class="mb-8 md:mb-16" v-intersection="onIntersection" id="reviews">
     <div class="container">
       <AppHeadingThird title="Отзывы" />
       <transition

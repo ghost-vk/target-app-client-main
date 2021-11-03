@@ -74,9 +74,9 @@ export default {
   },
   mounted() {
     this.$gtag.event('page_view', { page_title: 'Домашняя страница' })
-    console.log(this.$route)
+    const source = this.$route.query['source'] ? this.$route.query['source'] : 'Инстраграм Директ'
     if (this.$route.query['lead_form'] !== undefined && this.$route.query['lead_form'] === 'true') {
-      this.showDialog({ shouldCallback: true, source: 'Инстраграм Директ' })
+      this.showDialog({ shouldCallback: true, source })
     }
   },
   methods: mapActions({

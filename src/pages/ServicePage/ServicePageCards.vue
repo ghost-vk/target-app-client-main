@@ -4,8 +4,8 @@
       <div class="relative mb-28">
         <AppHeadingBubble title="Оставьте заявку" class="mb-14 md:mb-28" />
         <div class="text-md md:text-lg tracking-wide font-light mb-16">
-          <p class="mb-3 md:mb-6 relative z-20">
-            Я сертифицированный специалист в таргетированной рекламе и имею большой опыт
+          <p class="mb-3 md:mb-6 relative z-20" id="price">
+            Я сертифицированный специалист и имею большой опыт
             в таргетированной рекламе на площадках Instagram, Facebook. Это позволяет
             мне выстраивать оптимальные рекламные кампании и масштабировать их.
           </p>
@@ -16,7 +16,7 @@
           <ServicePageCardsThirdItem />
         </div>
         <div v-else>
-          <Swiper :slides-per-view="1" :navigation="screenWidth > 560" :pagination="{ clickable: true }" class="pb-10">
+          <Swiper :slides-per-view="1" :initial-slide="this.$route.query['price'] !== undefined && this.$route.query['price'] === 'consultation' ? 1 : 0" :navigation="screenWidth > 560" :pagination="{ clickable: true }" class="pb-10">
             <SwiperSlide class="flex justify-center px-2">
               <ServicePageCardsFirstItem />
             </SwiperSlide>
@@ -57,11 +57,6 @@ export default {
     return {
       screenWidth,
     }
-  },
-  methods: {
-    openLidForm() {
-      console.log('open lid form')
-    },
-  },
+  }
 }
 </script>

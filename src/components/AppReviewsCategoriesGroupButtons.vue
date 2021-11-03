@@ -20,7 +20,16 @@ export default {
     activeCategory: 'reviews/activeCategory',
   }),
   methods: mapActions({
-    updateActiveCategory: 'reviews/updateActiveCategory'
-  })
+    updateActiveCategory: 'reviews/updateActiveCategory',
+  }),
+  mounted() {
+    let queryCategory = this.$route.query['reviews_category']
+    if (
+      queryCategory !== undefined &&
+      this.buttons.filter((b) => b.value === queryCategory).length > 0
+    ) {
+      this.updateActiveCategory(queryCategory)
+    }
+  },
 }
 </script>
