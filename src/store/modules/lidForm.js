@@ -181,7 +181,7 @@ export default {
       }
     },
     updateCountry({ commit, dispatch }, value) {
-      const availableCodes = ['RU', 'UA', 'KZ', 'UZ', 'TJ', 'AZ']
+      const availableCodes = ['RU', 'UA', 'BY', 'KZ', 'UZ', 'TJ', 'AZ']
       if (availableCodes.find((code) => code === value)) {
         commit(UPDATE_COUNTRY_CODE, value)
       }

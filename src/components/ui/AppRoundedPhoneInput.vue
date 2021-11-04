@@ -141,6 +141,11 @@ export default {
           startsWith: '+380',
         },
         {
+          emoji: '🇧🇾',
+          code: 'BY',
+          startsWith: '+375',
+        },
+        {
           emoji: '🇰🇿',
           code: 'KZ',
           startsWith: '+77',
