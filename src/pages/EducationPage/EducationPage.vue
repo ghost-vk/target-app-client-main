@@ -24,8 +24,8 @@
         <p class="mb-4 md:mb-6">
           У меня был опыт кураторства на курсе по таргетированной рекламе. За несколько потоков на
           этом курсе я пообщалась со студентами и понимаю, что пройдя подобного рода курс врядли
-          сложится полная картина о таргете и будет множество вопросов. Пока я разрабатываю
-          курс, я решила сделать чат для начинающих/действующих таргетологов.
+          сложится полная картина о таргете и будет множество вопросов. Пока я разрабатываю курс, я
+          решила сделать чат для начинающих/действующих таргетологов.
         </p>
         <h6 class="mb-4 text-xl font-semibold">Сейчас у меня есть два инфопродукта:</h6>
         <ul class="list-disc list-inside mb-4">
@@ -58,13 +58,22 @@
         </ul>
         <p class="mb-4 text-lg font-semibold">Оставить заявку или задать вопрос</p>
         <div class="mb-2">
-          <AppBlueUnderlineLink class="block mb-2" @click="showDialog({ source: orderTelegramChat, shouldCallback: true })">
+          <AppBlueUnderlineLink
+            class="block mb-2"
+            @click="showDialog({ source: orderTelegramChat, shouldCallback: true })"
+          >
             {{ orderTelegramChat }}
           </AppBlueUnderlineLink>
-          <AppBlueUnderlineLink class="block mb-2" @click="showDialog({ source: orderTrainer, shouldCallback: true })">
+          <AppBlueUnderlineLink
+            class="block mb-2"
+            @click="showDialog({ source: orderTrainer, shouldCallback: true })"
+          >
             {{ orderTrainer }}
           </AppBlueUnderlineLink>
-          <AppBlueUnderlineLink class="block" @click="showDialog({ source: consultInfo, shouldCallback: true })">
+          <AppBlueUnderlineLink
+            class="block"
+            @click="showDialog({ source: consultInfo, shouldCallback: true })"
+          >
             {{ consultInfo }}
           </AppBlueUnderlineLink>
         </div>
@@ -196,7 +205,12 @@
       :questions="questions.value"
       category="mentor"
       @toggle="toggleQuestion"
-      @open-lid-form="showDialog({ source: 'Страница Обучения (из секции частозадаваемых вопросов)', shouldCallback: true })"
+      @open-lid-form="
+        showDialog({
+          source: 'Страница Обучения (из секции частозадаваемых вопросов)',
+          shouldCallback: true,
+        })
+      "
     />
     <AppModalWindow
       :is-shown="isTrainerDescriptionShown"
@@ -274,7 +288,7 @@ export default {
     questions: 'faq/educationPageQuestions',
   }),
   mounted() {
-    this.$gtag.event('page_view', { page_title: 'Страница обучения' })
+    this?.$gtag?.event('page_view', { page_title: 'Страница обучения' })
   },
   components: {
     NastyaRoundedCard,

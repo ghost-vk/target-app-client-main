@@ -52,7 +52,7 @@ import HomePageServices from '@/pages/HomePage/HomePageServices.vue'
 import SectionTitleWithButton from '@/components/ui/AppTitleWithButton.vue'
 import HomePageEducation from '@/pages/HomePage/HomePageEducation.vue'
 import HomePageSectionPosts from '@/pages/HomePage/HomePageSectionPosts.vue'
-import HomePageAboutCompany from '@/pages/HomePage/HomePageAboutCompany.vue'
+import HomePageAboutCompany from "@/pages/HomePage/HomePageAboutCompany.vue";
 import AppReviewsSection from '@/components/AppReviewsSection.vue'
 import ModalLidForm from '@/components/ModalLidForm.vue'
 import ModalLidFormCallbackNotification from '@/components/ModalLidFormCallbackNotification.vue'

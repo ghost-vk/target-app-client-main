@@ -36,15 +36,6 @@ export default {
       loadReviews: 'reviews/load',
       updateActiveCategory: 'reviews/updateActiveCategory',
     }),
-    onReviewsIntersect() {
-      if (!this.reviews.length) {
-        this.loadReviews({
-          category: 'target-setup',
-          limit: '10',
-          ordered: 1,
-        })
-      }
-    },
     setServiceCategory() {
       if (!this.isCatSet) {
         this.isCatSet = true
@@ -52,7 +43,6 @@ export default {
       }
     },
     onShowDialog(data) {
-      console.log(data)
       this.showDialog(data)
     },
   },
@@ -64,7 +54,7 @@ export default {
     }),
   },
   mounted() {
-    this.$gtag.event('page_view', { page_title: 'Cтраница услуг' })
+      this?.$gtag?.event('page_view', { page_title: 'Страница услуг' })
   },
   data() {
     return {

@@ -34,6 +34,14 @@ const routes = [
     component: () => import('@/pages/CaseArchievePage.vue')
   },
   {
+    path: '/t/:name',
+    component: () => import('@/pages/TripwirePage/TripwirePage.vue')
+  },
+  {
+    path: '/404',
+    component: () => import('@/pages/NotFound/NotFound.vue')
+  },
+  {
     path: '/:catchAll(.*)',
     component: () => import('@/pages/NotFound/NotFound.vue'),
   },

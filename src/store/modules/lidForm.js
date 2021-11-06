@@ -21,7 +21,7 @@ import {
   UPDATE_LOADING,
 } from '../mutation-types'
 
-const { query } = useGtag()
+const { query } = useGtag() || false
 
 export default {
   namespaced: true,
@@ -105,10 +105,12 @@ export default {
       commit(SHOW_MODAL)
       const source = typeof options === 'string' ? options : options.source
       dispatch('setLidSource', strLenFilter(source, 255))
-      query('event', 'view_lead_form', {
-        event_label: source,
-        event_category: 'leads',
-      })
+      if (query) {
+        query('event', 'view_lead_form', {
+          event_label: source,
+          event_category: 'leads',
+        })
+      }
     },
     hideModal({ commit }) {
       commit(HIDE_MODAL)
