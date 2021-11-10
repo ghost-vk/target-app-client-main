@@ -58,8 +58,6 @@ import ModalLidForm from '@/components/ModalLidForm.vue'
 import ModalLidFormCallbackNotification from '@/components/ModalLidFormCallbackNotification.vue'
 import { mapActions } from 'vuex'
 
-
-
 export default {
   components: {
     HomePageAboutCompany,

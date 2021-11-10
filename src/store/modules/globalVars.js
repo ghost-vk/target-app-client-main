@@ -11,7 +11,8 @@ export default {
         instagram: 'https://www.instagram.com/anastasi_target/',
         telegram: 'https://t.me/anastasi_target',
         whatsapp: 'https://api.whatsapp.com/send?phone=79309905159',
-        telegramChat: 'https://t.me/anastasitarget'
+        telegramChat: 'https://t.me/anastasitarget',
+        telegramPaymentBot: 'https://t.me/at_payment_bot'
       },
       colors: {
         main: '#A78BFA'

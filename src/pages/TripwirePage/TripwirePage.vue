@@ -19,10 +19,7 @@
     </SectionHero>
     <TripwirePageForWhom :tripwire="tripwire" />
     <TripwirePageAbout :tripwire="tripwire" />
-    <TripwirePageProductCard
-      :tripwire="tripwire"
-      @click-btn="onBuyLidFormOpening(tripwire.title)"
-    />
+    <TripwirePageProductCard :tripwire="tripwire" @click-btn="this.isPaymentModalShown = true" />
     <AppQuoteSection :text="tripwire.quote" class="mb-20" />
     <TripwirePageDetails :tripwire-content="tripwire.content" />
     <NastyaSquaredCard class="mb-12 md:mb-28" />
@@ -37,6 +34,56 @@
         class="mt-8"
       />
     </div>
+    <AppModalWindow :is-shown="this.isPaymentModalShown" @close="this.isPaymentModalShown = false">
+      <div class="text-center">
+        <div class="text-xl font-bold">Покупка материала</div>
+        <div class="text-gray-500 mb-5">{{ tripwire.title }}</div>
+      </div>
+      <div class="mb-4">
+        Вы можете купить данный материал через нашего
+        <AnalyticsLink
+          :href="contacts.telegramPaymentBot"
+          target="_blank"
+          route="переход в кассу (телеграм-бот)"
+          ><AppBlueUnderlineLink>Telegram бота</AppBlueUnderlineLink></AnalyticsLink
+        >
+        или оставить заявку и я сообщу Вам альтернативный способ оплаты.
+      </div>
+      <div class="flex justify-center sm:flex-nowrap flex-wrap">
+        <AnalyticsLink
+          :href="contacts.telegramPaymentBot"
+          route="переход в кассу (телеграм-бот)"
+          target="_blank"
+          class="w-full sm:w-auto"
+        >
+          <button
+            type="button"
+            class="
+              block
+              bg-blue-500
+              text-gray-50
+              px-3
+              py-1
+              rounded-full
+              shadow
+              mb-2
+              sm:mb-0 sm:mr-3
+              w-full
+              sm:w-auto
+            "
+          >
+            Через Telegram бот
+          </button>
+        </AnalyticsLink>
+        <button
+          type="button"
+          @click="openLeadFormForBuy(tripwire.title)"
+          class="block bg-purple-500 text-gray-50 px-3 py-1 rounded-full shadow w-full sm:w-auto"
+        >
+          Оставить заявку
+        </button>
+      </div>
+    </AppModalWindow>
     <ModalLidForm :title="lidFormTitle" />
     <ModalLidFormCallbackNotification />
   </div>
@@ -57,11 +104,12 @@ import TripwirePageProductCard from './TripwirePageProductCard.vue'
 import TripwirePageDetails from './TripwirePageDetails.vue'
 import TripwirePageMotivationConclusion from './TripwirePageMotivationConclusion.vue'
 import NastyaSquaredCard from '@/components/NastyaSquaredCard.vue'
+import AnalyticsLink from '@/components/AnalyticsLink.vue'
 import { InformationCircleIcon, ChevronRightIcon } from '@heroicons/vue/solid/index'
 import { AcademicCapIcon } from '@heroicons/vue/outline'
 import { useRoute, useRouter } from 'vue-router'
 import { useTripwires } from '@/use/tripwires'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { onMounted, onBeforeMount } from 'vue'
 import { useGtag } from 'vue-gtag-next'
 
@@ -88,13 +136,14 @@ export default {
     ...mapActions({
       showDialog: 'lidForm/showDialog',
     }),
-    onBuyLidFormOpening(tripwireName) {
-      this.isBuying = true
-      this.showDialog({ shouldCallback: true, source: `Покупка трипваера '${tripwireName}'` })
-    },
     onQuestionLidFormOpening(tripwireName) {
       this.isBuying = false
       this.showDialog({ shouldCallback: true, source: `Вопрос по трипваеру '${tripwireName}'` })
+    },
+    openLeadFormForBuy(tripwireName) {
+      this.isPaymentModalShown = false
+      this.isBuying = true
+      this.showDialog({ shouldCallback: true, source: `Покупка трипваера '${tripwireName}'` })
     },
   },
   components: {
@@ -114,11 +163,13 @@ export default {
     AppHeadingBubble,
     AppQuoteSection,
     AppDescriptionGrid,
-    NastyaSquaredCard
+    NastyaSquaredCard,
+    AnalyticsLink,
   },
   data() {
     return {
       isBuying: false,
+      isPaymentModalShown: false,
     }
   },
   computed: {
@@ -127,6 +178,9 @@ export default {
         ? 'Оставьте свои контактные данные и я напишу вам как оплатить и получить материал'
         : 'Оставьте свои контактные данные, мы свяжемся с вами в ближайшее время'
     },
+    ...mapGetters({
+      contacts: 'globalVars/contacts',
+    }),
   },
 }
 </script>

@@ -25,7 +25,7 @@
         md:p-10
       "
     >
-      <div @click.stop class="max-w-screen-sm h-screen sm:h-3/4 relative">
+      <div @click.stop class="max-w-screen-sm w-full sm:w-auto h-screen sm:h-3/4 relative">
         <div
           @click="close"
           class="
