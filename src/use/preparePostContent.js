@@ -1,3 +1,24 @@
+const expandComponent = (match) => {
+  let component = {}
+  match
+    .replace('{{', '')
+    .replace('}}', '')
+    .split('|')
+    .filter((p) => p)
+    .forEach((p) => {
+      const keyVal = p.trim().split('=')
+      component[keyVal[0]] = keyVal[1]
+    })
+
+  if (component.name === 'image') {
+    component.style = component.style ? component.style : ''
+    component.alt = component.alt ? component.alt : ''
+    return `<img class="rounded w-full mx-auto my-4" style="${component.style}" src="${SERVER_PATH}${component.src}" alt="${component.alt}" loading="lazy">`
+  }
+
+  return ''
+}
+
 export default function preparePostContent(content) {
   if (!content || typeof content !== 'string') {
     return ''
@@ -9,4 +30,5 @@ export default function preparePostContent(content) {
     .replaceAll('<div>', '<div class="mb-3">')
     .replaceAll('<ol>', '<ol class="list-decimal list-inside">')
     .replaceAll('<ul>', '<ul class="list-disc list-inside">')
+    .replaceAll(/\{{.+?\}}/gm, expandComponent)
 }
