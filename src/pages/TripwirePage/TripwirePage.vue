@@ -40,51 +40,35 @@
         <div class="text-gray-500 mb-5">{{ tripwire.title }}</div>
       </div>
       <div class="mb-4">
-        Вы можете купить данный материал через нашего
-        <AnalyticsLink
-          :href="contacts.telegramPaymentBot"
-          target="_blank"
-          route="переход в кассу (телеграм-бот)"
-          ><AppBlueUnderlineLink>Telegram бота</AppBlueUnderlineLink></AnalyticsLink
-        >
-        или оставить заявку и я сообщу Вам альтернативный способ оплаты.
+        Оплата производится через нашего Telegram бота. Нажмите <AppBlueUnderlineLink @click="openLeadFormForBuy(tripwire.title)">здесь</AppBlueUnderlineLink>, если у вас возникли вопросы по оплате.
       </div>
       <div class="flex justify-center sm:flex-nowrap flex-wrap">
         <AnalyticsLink
           :href="contacts.telegramPaymentBot"
           route="переход в кассу (телеграм-бот)"
           target="_blank"
-          class="w-full sm:w-auto"
+          class="block w-full sm:w-auto"
         >
           <button
             type="button"
             class="
-              block
               bg-blue-500
               text-gray-50
-              px-3
-              py-1
+              px-16
+              py-2
               rounded-full
               shadow
-              mb-2
-              sm:mb-0 sm:mr-3
               w-full
-              sm:w-auto
+              relative
             "
           >
-            Через Telegram бот
+            <AppTelegramIcon class="absolute left-3 transform top-1/2 -translate-y-1/2 w-6 h-6"/>
+            Оплатить
           </button>
         </AnalyticsLink>
-        <button
-          type="button"
-          @click="openLeadFormForBuy(tripwire.title)"
-          class="block bg-purple-500 text-gray-50 px-3 py-1 rounded-full shadow w-full sm:w-auto"
-        >
-          Оставить заявку
-        </button>
       </div>
     </AppModalWindow>
-    <ModalLidForm :title="lidFormTitle" />
+    <ModalLidForm />
     <ModalLidFormCallbackNotification />
   </div>
 </template>
@@ -137,13 +121,11 @@ export default {
       showDialog: 'lidForm/showDialog',
     }),
     onQuestionLidFormOpening(tripwireName) {
-      this.isBuying = false
       this.showDialog({ shouldCallback: true, source: `Вопрос по трипваеру '${tripwireName}'` })
     },
     openLeadFormForBuy(tripwireName) {
       this.isPaymentModalShown = false
-      this.isBuying = true
-      this.showDialog({ shouldCallback: true, source: `Покупка трипваера '${tripwireName}'` })
+      this.showDialog({ shouldCallback: true, source: `Вопрос по трипваеру '${tripwireName}'` })
     },
   },
   components: {
@@ -168,16 +150,10 @@ export default {
   },
   data() {
     return {
-      isBuying: false,
-      isPaymentModalShown: false,
+      isPaymentModalShown: false
     }
   },
   computed: {
-    lidFormTitle() {
-      return this.isBuying
-        ? 'Оставьте свои контактные данные и я напишу вам как оплатить и получить материал'
-        : 'Оставьте свои контактные данные, мы свяжемся с вами в ближайшее время'
-    },
     ...mapGetters({
       contacts: 'globalVars/contacts',
     }),
