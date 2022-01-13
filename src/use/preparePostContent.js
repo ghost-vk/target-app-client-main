@@ -25,7 +25,9 @@ export default function preparePostContent(content) {
   }
   return content
     .replaceAll('<h3>', '<h3 class="text-3xl font-semibold mt-20 mb-8">')
-    .replaceAll('<h6>', '<h6 class="text-base font-semibold mb-3">')
+    .replaceAll('<h4>', '<h4 class="text-2xl font-semibold mt-16 mb-6">')
+    .replaceAll('<h5>', '<h5 class="text-xl font-semibold mt-12 mb-4">')
+    .replaceAll('<h6>', '<h6 class="text-xl font-semibold mt-8 mb-3">')
     .replaceAll('<p>', '<p class="mb-3">')
     .replaceAll('<div>', '<div class="mb-3">')
     .replaceAll('<ol>', '<ol class="list-decimal list-inside">')
