@@ -10,6 +10,7 @@ import pageLoader from './modules/pageLoader'
 import magnets from './modules/magnets'
 import user from './modules/user'
 import notification from './modules/notification'
+import banners from './modules/banners'
 
 export const store = createStore({
   modules: {
@@ -24,6 +25,7 @@ export const store = createStore({
     magnets,
     user,
     notification,
+    banners,
   },
 })
 

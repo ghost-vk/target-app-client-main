@@ -16,10 +16,11 @@
         </div>
       </div>
     </div>
-    <div>
+    <CasePageResults v-if="displayValues.case_stats" :stats="displayValues.case_stats" />
+    <div v-else>
       <div v-if="displayValues.thumbnail">
         <img
-          class="mx-auto"
+          class="mx-auto rounded"
           :class="imageClass"
           v-lazy="{ src: displayValues.thumbnail || '', lifecycle: lazyLoading.lifecycle }"
           alt=""
@@ -36,7 +37,12 @@ import imageLazyLoading from '@/use/imageLazyLoading'
 import avatar from '@/assets/img/anastasiya-circle.jpg'
 import { mapActions, mapGetters } from 'vuex'
 import { dateFilter } from '@/filters/date.filter'
+import CasePageResults from '@/pages/CasePage/CasePageResults.vue'
+
 export default {
+  components: {
+    CasePageResults,
+  },
   setup() {
     const router = useRouter()
     const { imageClass, lazyLoading } = imageLazyLoading('')
@@ -49,6 +55,7 @@ export default {
       avatar: avatar,
       imageClass,
       lazyLoading,
+      screen: window.innerWidth,
     }
   },
   computed: {
@@ -70,8 +77,8 @@ export default {
   },
   watch: {
     status(val) {
-      console.log(val);
-    }
-  }
+      console.log(val)
+    },
+  },
 }
 </script>

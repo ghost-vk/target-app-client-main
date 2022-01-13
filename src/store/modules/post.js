@@ -34,6 +34,10 @@ export default {
         try {
           let { data } = await axios.get(`${SERVER_PATH}/api/posts/${id}`)
           data.thumbnail = data.thumbnail ? SERVER_PATH + data.thumbnail : ''
+          data.case_stats = data.case_stats ? JSON.parse(data.case_stats) : null
+          if (data.case_stats && window.innerWidth <= 400 && data.case_stats.length > 2) {
+            data.case_stats.splice(1, data.case_stats.length - 2)
+          }
           data.content = preparePostContent(data.content)
           commit('updateDisplayValues', data)
         } catch (err) {

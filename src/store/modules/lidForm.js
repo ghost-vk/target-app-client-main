@@ -1,7 +1,6 @@
 import { lidFormSchema } from '@/utils/yup-config'
 import { isValidPhoneNumber } from 'libphonenumber-js'
 import api from '@/http'
-// import { setApiErrorCallback } from '@/http/setApiErrorCallback'
 import { networkErrorNotification } from '../networkErrorNotification'
 import strLenFilter from '@/filters/strLen.filter'
 import { useGtag } from 'vue-gtag-next'

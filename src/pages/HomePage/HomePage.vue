@@ -13,12 +13,13 @@
         </RouterLink>
       </div>
     </SectionHero>
+    <HomePageBanners />
     <HomePageAboutCompany />
     <HomePageServices />
     <div class="container mb-8 sm:mb-16 sm:test-lg md:text-xl">
-      Я предоставляю качественные услуги по настройке таргета. Я всегда в курсе последних обновлений
-      Facebook / Instagram. Со мной можно быть уверенным в том, что ваш рекламный кабинет не будет
-      заблокирован, а реклама будет настроена оптимально для вашего бизнеса и бюджета.
+      Я предоставляю качественные услуги по настройке таргета. Я всегда в курсе последних обновлений Facebook /
+      Instagram. Со мной можно быть уверенным в том, что ваш рекламный кабинет не будет заблокирован, а реклама будет
+      настроена оптимально для вашего бизнеса и бюджета.
     </div>
     <div class="container mb-14 sm:mb-56">
       <AppTitleWithButton
@@ -52,14 +53,16 @@ import HomePageServices from '@/pages/HomePage/HomePageServices.vue'
 import SectionTitleWithButton from '@/components/ui/AppTitleWithButton.vue'
 import HomePageEducation from '@/pages/HomePage/HomePageEducation.vue'
 import HomePageSectionPosts from '@/pages/HomePage/HomePageSectionPosts.vue'
-import HomePageAboutCompany from "@/pages/HomePage/HomePageAboutCompany.vue";
+import HomePageAboutCompany from '@/pages/HomePage/HomePageAboutCompany.vue'
 import AppReviewsSection from '@/components/AppReviewsSection.vue'
 import ModalLidForm from '@/components/ModalLidForm.vue'
 import ModalLidFormCallbackNotification from '@/components/ModalLidFormCallbackNotification.vue'
 import { mapActions } from 'vuex'
+import HomePageBanners from '@/pages/HomePage/HomePageBanners.vue'
 
 export default {
   components: {
+    HomePageBanners,
     HomePageAboutCompany,
     SectionHero,
     SectionHeroMainTitle,
