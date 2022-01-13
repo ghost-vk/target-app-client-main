@@ -27,7 +27,19 @@
         />
       </div>
     </div>
-    <div class="max-w-screen-sm mx-auto text-base md:text-lg" v-html="displayValues.content"></div>
+    <div class="max-w-screen-sm mx-auto text-base md:text-lg mb-10" v-html="displayValues.content"></div>
+    <div class="max-w-screen-sm mx-auto">
+      <AppTitleWithButton
+        :is-always-column="true"
+        :is-event="true"
+        @handle="showDialog({ source: `Кейс (${displayValues.title})`, shouldCallback: true })"
+        title="Нужна настройка рекламы?"
+        link-title="Оставить заявку"
+        class="mt-8"
+      />
+    </div>
+    <ModalLidForm />
+    <ModalLidFormCallbackNotification />
   </div>
 </template>
 
@@ -38,10 +50,14 @@ import avatar from '@/assets/img/anastasiya-circle.jpg'
 import { mapActions, mapGetters } from 'vuex'
 import { dateFilter } from '@/filters/date.filter'
 import CasePageResults from '@/pages/CasePage/CasePageResults.vue'
+import ModalLidForm from '@/components/ModalLidForm.vue'
+import ModalLidFormCallbackNotification from '@/components/ModalLidFormCallbackNotification.vue'
 
 export default {
   components: {
     CasePageResults,
+    ModalLidForm,
+    ModalLidFormCallbackNotification,
   },
   setup() {
     const router = useRouter()
@@ -68,17 +84,13 @@ export default {
   methods: {
     ...mapActions({
       load: 'post/loadPost',
+      showDialog: 'lidForm/showDialog',
     }),
     dateFilter,
   },
   async mounted() {
     await this.load(this.id)
     this.$gtag.event('page_view', { page_title: `Просмотр кейса: ${this.displayValues.title}` })
-  },
-  watch: {
-    status(val) {
-      console.log(val)
-    },
   },
 }
 </script>

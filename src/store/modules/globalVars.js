@@ -18,6 +18,7 @@ export default {
         main: '#A78BFA'
       },
       briefURL: 'https://forms.gle/RYYJK4oZ4hxcmKMc9',
+      shouldHeaderVisible: true
     }
   },
   getters: {
@@ -33,5 +34,18 @@ export default {
     briefURL(state) {
       return state.briefURL
     },
+    shouldHeaderVisible(state) {
+      return state.shouldHeaderVisible
+    }
+  },
+  actions: {
+    handleHeader({ commit }, value) {
+      commit('setHeader', !!value)
+    }
+  },
+  mutations: {
+    setHeader(state, value) {
+      state.shouldHeaderVisible = value
+    }
   }
 }

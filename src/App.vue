@@ -27,14 +27,13 @@ import AppScrollToTopButton from '@/components/AppScrollToTopButton.vue'
 import AppCookieNotification from '@/components/AppCookieNotification.vue'
 import AppNotificationContainer from '@/components/AppNotificationContainer.vue'
 import Loading from 'vue-loading-overlay'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
     return {
       isMenuOpened: false,
       lastScrollPosition: window.scrollY,
-      shouldHeaderVisible: true,
       isScrollButtonVisible: false,
     }
   },
@@ -59,6 +58,9 @@ export default {
       }
       this.isScrollButtonVisible = position > 500
     },
+    ...mapActions({
+      handleHeader: 'globalVars/handleHeader'
+    })
   },
   created() {
     window.addEventListener('scroll', this.onScroll)
@@ -69,15 +71,16 @@ export default {
   watch: {
     lastScrollPosition(newPosition, oldPosition) {
       if (newPosition > 200) {
-        this.shouldHeaderVisible = !(newPosition > oldPosition) && newPosition > 200
+        this.handleHeader(!(newPosition > oldPosition) && newPosition > 200)
       } else {
-        this.shouldHeaderVisible = true
+        this.handleHeader(true)
       }
     },
   },
   computed: mapGetters({
     isLoadingPage: 'isLoadingPage',
     colors: 'globalVars/colors',
+    shouldHeaderVisible: 'globalVars/shouldHeaderVisible'
   }),
 }
 </script>

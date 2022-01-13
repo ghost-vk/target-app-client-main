@@ -21,9 +21,6 @@
 </template>
 
 <script>
-import img1440 from '@/assets/img/almaz-1440-1641998466043.png'
-import img980 from '@/assets/img/almaz-980-1641998466045.png'
-import img430 from '@/assets/img/almaz-430.png'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -64,9 +61,6 @@ export default {
     }
 
     return {
-      img1440,
-      img980,
-      img430,
       bannerClass,
       banner,
       screenPoints,
