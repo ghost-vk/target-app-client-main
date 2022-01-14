@@ -23,9 +23,11 @@
 <script>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useGtag } from 'vue-gtag-next'
 
 export default {
   setup(props) {
+    const { event } = useGtag()
     const bannerClass = ref('')
 
     const toSmall = () => {
@@ -42,6 +44,11 @@ export default {
         return
       }
 
+      event('click_banner', {
+        event_category: 'directing',
+        event_label: `Переход: ${banner.src}`,
+      })
+
       if (url.includes('https://anastasi-target.ru')) {
         const path = url.replace('https://anastasi-target.ru', '')
         router.push(path)
@@ -51,7 +58,6 @@ export default {
       window.location = url
     }
 
-    // works only with first one banner for a time
     const banner = props.banner
     let screenPoints = []
 

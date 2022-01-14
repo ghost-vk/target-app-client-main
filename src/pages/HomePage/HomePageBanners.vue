@@ -7,7 +7,7 @@
     leave-from-class="opacity-100"
     leave-to-class="opacity-0"
   >
-    <div v-if="banners.length > 0" class="container mb-20">
+    <div v-if="banners.length > 0" class="container pb-20 overflow-hidden">
       <Swiper
         v-if="banners.length > 1"
         :class="screenWidth > 1023 ? 'rounded-xl shadow-2xl' : ''"

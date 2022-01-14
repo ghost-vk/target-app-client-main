@@ -1,5 +1,5 @@
 <template>
-  <section class="mb-8 md:mb-16" v-intersection="onIntersection" id="at_reviews">
+  <section class="pb-8 md:pb-16 overflow-hidden" v-intersection="onIntersection" id="at_reviews">
     <div class="container">
       <AppHeadingThird v-html="reviewsTitle" />
       <transition

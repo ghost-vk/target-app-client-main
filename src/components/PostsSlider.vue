@@ -1,5 +1,5 @@
 <template>
-  <div class="block mb-6">
+  <div class="block pb-6 overflow-hidden">
     <Swiper
       :slides-per-view="screenWidth > 1024 ? 3 : 1"
       :navigation="screenWidth > 560 && cases.length > 3"
