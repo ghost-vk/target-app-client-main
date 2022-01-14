@@ -28,6 +28,10 @@ export default {
           return
         }
 
+        if (response.data.length > 1) {
+          response.data.sort((a, b) => -(a.priority - b.priority))
+        }
+
         commit('setBanners', response.data)
       } catch (e) {
         commit('setBanners', [])

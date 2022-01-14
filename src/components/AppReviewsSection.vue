@@ -1,7 +1,7 @@
 <template>
   <section class="mb-8 md:mb-16" v-intersection="onIntersection" id="at_reviews">
     <div class="container">
-      <AppHeadingThird title="Отзывы" />
+      <AppHeadingThird v-html="reviewsTitle" />
       <transition
         enter-active-class="duration-300"
         enter-from-class="opacity-0"
@@ -21,15 +21,11 @@
             <AppReviewsCategoriesGroupButtons class="max-w-screen-sm mx-auto justify-center" />
             <Swiper
               :slides-per-view="1"
-              navigation
+              :navigation = "screenWidth > 1023"
               :pagination="reviews.length < 16 ? { clickable: true } : false"
               class="pb-10"
             >
-              <SwiperSlide
-                v-for="review in reviews"
-                :key="review.id"
-                class="px-2 lg:px-10 flex justify-center"
-              >
+              <SwiperSlide v-for="review in reviews" :key="review.id" class="px-2 lg:px-10 flex justify-center">
                 <AppReviewCard
                   :thumbnail="serverHost + review.image"
                   :name="review.full_name"
@@ -91,6 +87,9 @@ export default {
       loadingStatus: 'reviews/loadingStatus',
       isLoading: 'reviews/isLoading',
     }),
+    reviewsTitle() {
+      return this.reviews && this.reviews?.length > 0 ? `Отзывы <span class="font-light text-gray-500 text-xl md:text-3xl">(${this.reviews.length})</span>` : 'Отзывы'
+    },
   },
   setup() {
     const { screenWidth } = useScreenWidth()

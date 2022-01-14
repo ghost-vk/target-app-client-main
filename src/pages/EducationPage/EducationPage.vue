@@ -30,16 +30,8 @@
         <h6 class="mb-4 text-xl font-semibold">Сейчас у меня есть два инфопродукта:</h6>
         <ul class="list-disc list-inside mb-4">
           <li class="mb-2">
-            <span class="font-semibold">Подписка Lite</span> на telegram чат, в котором я отвечаю на
-            ваши вопросы с 10:00 до 18:00.
-            <AppPilledText>990 &#8381; / месяц</AppPilledText>
-            <a href="#telegramchat">
-              <AppBlueUnderlineLink>Подробнее ...</AppBlueUnderlineLink>
-            </a>
-          </li>
-          <li class="mb-2">
-            <span class="font-semibold">Подписка Pro</span> на telegram чат, в котором я отвечаю на
-            ваши вопросы с 10:00 до 18:00, делюсь полезными материалами, а также провожу 4
+            <span class="font-semibold">Подписка на telegram чат</span> , в котором я отвечаю на
+            ваши вопросы с 10:00 до 18:00, делюсь полезными материалами, а также провожу 3-4
             мастермайнда на темы, актуальные для таргетологов.
             <AppPilledText>2 490 &#8381; / месяц</AppPilledText>
             <a href="#telegramchat">
@@ -117,49 +109,10 @@
           <li class="mb-2">нужна поддержка от опытного таргетолога</li>
           <li>быстрая обратная связь</li>
         </ul>
-        <div class="text-lg font-semibold text-center my-3">Сравнение тарифов</div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-3 mt-5">
-          <div class="flex flex-col justify-between bg-white shadow rounded-lg p-3">
-            <div>
-              <div class="text-center uppercase font-semibold text-lg">lite</div>
-              <div>
-                <ul class="list-inside list-disc pl-2 mb-3">
-                  <li>ответы на ваши вопросы</li>
-                  <li>индивидуальный подход</li>
-                  <li>месяц поддержки опытного специалиста</li>
-                  <li>15 мест в месяц</li>
-                </ul>
-              </div>
-            </div>
-            <div>
-              <div
-                class="
-                  flex
-                  items-center
-                  justify-center
-                  text-center text-black
-                  mb-3
-                  bg-purple-50
-                  px-3
-                  py-1.5
-                  rounded-lg
-                "
-              >
-                <CreditCardIcon class="h-6 w-6 mr-3" />
-                <p class="font-bold">990 &#8381;</p>
-              </div>
-              <button
-                class="w-full bg-green-100 rounded-lg shadow font-semibold text-gray-600 p-2"
-                type="button"
-                @click="showDialog({ source: orderTelegramChatLite, shouldCallback: true })"
-              >
-                Отправить заявку
-              </button>
-            </div>
-          </div>
+        <div class="mx-auto w-full sm:w-1/2 mt-5">
           <div class="flex flex-col justify-between bg-purple-200 shadow rounded-lg p-3">
             <div>
-              <div class="text-center uppercase font-semibold text-lg text-purple-700">pro ✨</div>
+              <div class="text-center uppercase font-semibold text-lg text-purple-700">Подписка на чат</div>
               <div>
                 <ul class="list-inside list-disc sm:pl-2 mb-3">
                   <li>ответы на ваши вопросы</li>

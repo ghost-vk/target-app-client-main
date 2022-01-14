@@ -1,12 +1,14 @@
 <template>
   <h3
-    v-text="title"
     :class="
       titlePositionClass
         ? 'text-3xl md:text-5xl text-center font-bold ' + titlePositionClass
         : 'text-3xl md:text-5xl text-center font-bold mb-8 md:mb-16'
     "
-  />
+  >
+    {{ title }}
+    <slot />
+  </h3>
 </template>
 
 <script>
@@ -15,14 +17,11 @@ export default {
   props: {
     title: {
       type: String,
-      required: true,
-      default() {
-        return true
-      }
+      required: false,
     },
     titlePositionClass: {
-      type: String
-    }
-  }
+      type: String,
+    },
+  },
 }
 </script>

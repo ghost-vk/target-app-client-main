@@ -1,6 +1,6 @@
 <template>
   <div
-    @click="goToUrl(banners[0].url)"
+    @click="goToUrl(banner.url)"
     @touchstart="toSmall"
     @touchend="backToNormal"
     @touchleave="backToNormal"
@@ -15,7 +15,7 @@
         :media="`(max-width: ${point}px)`"
         :srcset="serverHost + banner.srcset[point]"
       />
-      <img :src="serverHost + banners[0].src" alt="" class="img" />
+      <img :src="serverHost + banner.src" alt="" class="img" />
     </picture>
   </div>
 </template>
@@ -52,7 +52,7 @@ export default {
     }
 
     // works only with first one banner for a time
-    const banner = props.banners[0]
+    const banner = props.banner
     let screenPoints = []
 
     if (Object.keys(banner.srcset).length > 0) {
@@ -71,8 +71,8 @@ export default {
     }
   },
   props: {
-    banners: {
-      type: Array,
+    banner: {
+      type: Object,
       default() {
         return []
       },
@@ -84,11 +84,6 @@ export default {
 <style lang="scss" scoped>
 .case {
   transition: transform 0.3s ease;
-}
-@media (min-width: 1023px) {
-  .case:hover {
-    transform: scale(0.98);
-  }
 }
 
 @media (max-width: 1024px) {
