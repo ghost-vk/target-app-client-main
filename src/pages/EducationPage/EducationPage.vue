@@ -14,6 +14,7 @@
         />
       </div>
     </SectionHero>
+    <HomePageBanners />
     <div class="container mb-10 md:py-5">
       <AppHeadingThird title="Доступные программы" />
       <div class="text-md md:text-lg tracking-wide font-light mb-16 max-w-screen-sm mx-auto">
@@ -216,6 +217,7 @@ import NastyaRoundedCard from '@/components/NastyaRoundedCard.vue'
 import ModalLidForm from '@/components/ModalLidForm.vue'
 import ModalLidFormCallbackNotification from '@/components/ModalLidFormCallbackNotification.vue'
 import AppReviewsSection from '@/components/AppReviewsSection.vue'
+import HomePageBanners from '@/pages/HomePage/HomePageBanners.vue'
 import FAQ from '@/components/FAQ.vue'
 import { mapActions, mapGetters } from 'vuex'
 import { ClockIcon, CreditCardIcon } from '@heroicons/vue/outline'
@@ -255,6 +257,7 @@ export default {
     CreditCardIcon,
     FAQ,
     AppReviewsSection,
+    HomePageBanners
   },
   data() {
     return {

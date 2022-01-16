@@ -15,7 +15,7 @@
         :media="`(max-width: ${point}px)`"
         :srcset="serverHost + banner.srcset[point]"
       />
-      <img :src="serverHost + banner.src" alt="" class="img" />
+      <img :src="serverHost + banner.src" alt="" class="img" :loading="loading" />
     </picture>
   </div>
 </template>
@@ -73,7 +73,7 @@ export default {
       goToUrl,
       toSmall,
       backToNormal,
-      serverHost: SERVER_PATH,
+      serverHost: SERVER_PATH
     }
   },
   props: {
@@ -81,6 +81,12 @@ export default {
       type: Object,
       default() {
         return []
+      },
+    },
+    loading: {
+      type: String,
+      default() {
+        return 'eager'
       },
     },
   },

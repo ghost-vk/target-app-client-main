@@ -1,6 +1,7 @@
 <template>
   <div>
     <ServicePageHero @open-lid-form="onShowDialog" />
+    <HomePageBanners class="mb-8" />
     <ServicePageFeatures />
     <ServicePageAbout />
     <ServicePageConsultationTitle @open-lid-form="onShowDialog" />
@@ -28,6 +29,7 @@ import ServicePageFAQ from '@/pages/ServicePage/ServicePageFAQ.vue'
 import ModalLidForm from '@/components/ModalLidForm.vue'
 import ModalLidFormCallbackNotification from '@/components/ModalLidFormCallbackNotification.vue'
 import AppReviewsSection from '@/components/AppReviewsSection.vue'
+import HomePageBanners from '@/pages/HomePage/HomePageBanners.vue'
 
 export default {
   methods: {
@@ -74,6 +76,7 @@ export default {
     ServicePageCards,
     ServicePageFAQ,
     ModalLidFormCallbackNotification,
+    HomePageBanners
   },
 }
 </script>

@@ -18,8 +18,8 @@
         :pagination="{ clickable: true }"
         :autoplay="{ delay: 5000, pauseOnMouseEnter: true }"
       >
-        <SwiperSlide v-for="b in banners" :key="b.url">
-          <AppBigBanner :banner="b" />
+        <SwiperSlide v-for="(b, i) in banners" :key="b.url">
+          <AppBigBanner :banner="b" :loading="i > 0 ? 'lazy' : 'eager'" />
         </SwiperSlide>
       </Swiper>
       <AppBigBanner v-else :banner="banners[0]" />

@@ -31,6 +31,6 @@ export default function preparePostContent(content) {
     .replaceAll('<p>', '<p class="mb-3">')
     .replaceAll('<div>', '<div class="mb-3">')
     .replaceAll('<ol>', '<ol class="list-decimal list-inside">')
-    .replaceAll('<ul>', '<ul class="list-disc list-inside">')
+    .replaceAll('<ul>', '<ul class="list-disc list-inside mb-3">')
     .replaceAll(/\{{.+?\}}/gm, expandComponent)
 }
