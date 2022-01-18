@@ -24,6 +24,8 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGtag } from 'vue-gtag-next'
+import { event } from '@/plugins/vue3-facebook-pixel'
+const fbEvent = event
 
 export default {
   setup(props) {
@@ -46,8 +48,10 @@ export default {
 
       event('click_banner', {
         event_category: 'directing',
-        event_label: `Переход: ${banner.src}`,
+        event_label: `Переход: ${banner.url}`,
       })
+
+      fbEvent('ClickBanner', { route: banner.url })
 
       if (url.includes('https://anastasi-target.ru')) {
         const path = url.replace('https://anastasi-target.ru', '')
@@ -73,7 +77,7 @@ export default {
       goToUrl,
       toSmall,
       backToNormal,
-      serverHost: SERVER_PATH
+      serverHost: SERVER_PATH,
     }
   },
   props: {
@@ -87,6 +91,12 @@ export default {
       type: String,
       default() {
         return 'eager'
+      },
+    },
+    index: {
+      type: Number,
+      default() {
+        return -1
       },
     },
   },

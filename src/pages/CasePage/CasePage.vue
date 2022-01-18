@@ -91,6 +91,7 @@ export default {
   async mounted() {
     await this.load(this.id)
     this.$gtag.event('page_view', { page_title: `Просмотр кейса: ${this.displayValues.title}` })
+    this.$fbq.event('ViewContent', { content_category: 'Кейсы', content_name: this.displayValues.title })
   },
 }
 </script>

@@ -4,6 +4,7 @@ import api from '@/http'
 import { networkErrorNotification } from '../networkErrorNotification'
 import strLenFilter from '@/filters/strLen.filter'
 import { useGtag } from 'vue-gtag-next'
+import { event } from '@/plugins/vue3-facebook-pixel'
 import {
   UPDATE_CONTACT_TYPE_BUTTONS,
   UPDATE_CHECK,
@@ -109,6 +110,9 @@ export default {
           event_label: source,
           event_category: 'leads',
         })
+        event('ViewLeadForm', {
+          source: options.source || 'Without source',
+        })
       }
     },
     hideModal({ commit }) {
@@ -145,9 +149,10 @@ export default {
           ],
           { root: true }
         )
+        query('event', 'generate_lead') // Google analytics
+        event('Lead', { content_name: getters.fieldValues.source || 'Without source' })
         dispatch('resetValues')
         dispatch('updateNotification', { isShown: true, sendingFormStatus: true })
-        query('event', 'generate_lead') // Google analytics
       } catch (err) {
         if (err.request) {
           dispatch('notification/createMessage', networkErrorNotification(), { root: true })

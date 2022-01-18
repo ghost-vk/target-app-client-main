@@ -59,14 +59,24 @@ export default {
       this.isScrollButtonVisible = position > 500
     },
     ...mapActions({
-      handleHeader: 'globalVars/handleHeader'
-    })
+      handleHeader: 'globalVars/handleHeader',
+    }),
   },
   created() {
     window.addEventListener('scroll', this.onScroll)
   },
   destroyed() {
     window.removeEventListener('scroll', this.onScroll)
+  },
+
+  beforeCreate() {
+    const router = this.$router
+
+    this.$fbq.init({
+      router,
+      appId: 123456,
+      excludes: []
+    })
   },
   watch: {
     lastScrollPosition(newPosition, oldPosition) {
@@ -80,7 +90,7 @@ export default {
   computed: mapGetters({
     isLoadingPage: 'isLoadingPage',
     colors: 'globalVars/colors',
-    shouldHeaderVisible: 'globalVars/shouldHeaderVisible'
+    shouldHeaderVisible: 'globalVars/shouldHeaderVisible',
   }),
 }
 </script>
